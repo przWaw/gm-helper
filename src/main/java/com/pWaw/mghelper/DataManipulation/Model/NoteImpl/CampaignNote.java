@@ -1,7 +1,7 @@
-package com.pWaw.mghelper.Model.NoteImpl;
+package com.pWaw.mghelper.DataManipulation.Model.NoteImpl;
 
-import com.pWaw.mghelper.Model.Campaign;
-import com.pWaw.mghelper.Model.Note;
+import com.pWaw.mghelper.DataManipulation.Model.Campaign;
+import com.pWaw.mghelper.DataManipulation.Model.Note;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;

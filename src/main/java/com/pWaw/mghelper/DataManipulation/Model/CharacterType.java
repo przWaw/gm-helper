@@ -1,4 +1,4 @@
-package com.pWaw.mghelper.Model;
+package com.pWaw.mghelper.DataManipulation.Model;
 
 public enum CharacterType {
     PLAYER,

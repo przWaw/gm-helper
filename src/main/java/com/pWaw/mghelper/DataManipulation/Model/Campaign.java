@@ -1,4 +1,4 @@
-package com.pWaw.mghelper.Model;
+package com.pWaw.mghelper.DataManipulation.Model;
 
 import jakarta.persistence.*;
 import lombok.Data;
