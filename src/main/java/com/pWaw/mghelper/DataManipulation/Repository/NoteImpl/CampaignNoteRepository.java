@@ -1,4 +1,4 @@
-package com.pWaw.mghelper.DataManipulation.Repository;
+package com.pWaw.mghelper.DataManipulation.Repository.NoteImpl;
 
 import com.pWaw.mghelper.DataManipulation.Model.NoteImpl.CampaignNote;
 import org.springframework.data.jpa.repository.JpaRepository;
