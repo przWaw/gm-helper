@@ -11,7 +11,7 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface NoteMapper {
     @Mapping(source = "characterId", target = "character.id")
     CharacterNote dtoToCharacterNote(CharacterNoteDto noteDto);

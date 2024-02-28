@@ -18,10 +18,8 @@ public class Character {
 
     private String characterAbstract;
 
-    @Lob
-    private byte[] characterPortrait;
-
-    private String fileType;
+    @Embedded
+    private Image characterPortrait;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Campaign campaign;

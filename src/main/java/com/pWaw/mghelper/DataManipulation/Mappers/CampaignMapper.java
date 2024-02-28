@@ -6,11 +6,10 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CampaignMapper {
     Campaign dtoToCampaign(CampaignDto campaignDto);
     CampaignDto campaignToDto(Campaign campaign);
-
     List<Campaign> dtoToCampaign(List<CampaignDto> campaignsDtos);
     List<CampaignDto> campaignToDto(List<Campaign> campaigns);
 }

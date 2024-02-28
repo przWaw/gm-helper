@@ -5,7 +5,7 @@ import com.pWaw.mghelper.DataManipulation.Model.Character;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import java.util.List;
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CharacterMapper {
 
     @Mapping(target = "campaign.id", source = "campaignId")

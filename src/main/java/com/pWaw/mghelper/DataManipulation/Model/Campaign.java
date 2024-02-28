@@ -13,9 +13,7 @@ public class Campaign {
 
     private String campaignName;
 
-    @Lob
-    private byte[] campaignImage;
-
-    private String fileType;
+    @Embedded
+    private Image campaignImage;
 
 }

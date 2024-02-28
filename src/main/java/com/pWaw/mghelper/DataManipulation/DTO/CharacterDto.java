@@ -1,6 +1,7 @@
 package com.pWaw.mghelper.DataManipulation.DTO;
 
 import com.pWaw.mghelper.DataManipulation.Model.CharacterType;
+import com.pWaw.mghelper.DataManipulation.Model.Image;
 import lombok.Data;
 
 @Data
@@ -9,7 +10,6 @@ public class CharacterDto {
     private CharacterType characterType;
     private String characterName;
     private String characterAbstract;
-    private byte[] characterPortrait;
-    private String fileType;
+    private Image characterPortrait;
     private Long campaignId;
 }
