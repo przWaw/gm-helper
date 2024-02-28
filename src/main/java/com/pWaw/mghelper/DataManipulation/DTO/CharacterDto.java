@@ -10,5 +10,6 @@ public class CharacterDto {
     private String characterName;
     private String characterAbstract;
     private byte[] characterPortrait;
+    private String fileType;
     private Long campaignId;
 }

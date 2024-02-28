@@ -7,4 +7,5 @@ public class CampaignDto {
     private Long id;
     private String campaignName;
     private byte[] campaignImage;
+    private String fileType;
 }

@@ -21,6 +21,8 @@ public class Character {
     @Lob
     private byte[] characterPortrait;
 
+    private String fileType;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Campaign campaign;
 

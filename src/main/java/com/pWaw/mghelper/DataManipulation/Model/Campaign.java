@@ -16,4 +16,6 @@ public class Campaign {
     @Lob
     private byte[] campaignImage;
 
+    private String fileType;
+
 }
