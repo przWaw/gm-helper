@@ -16,7 +16,7 @@ public class Character {
 
     private String characterName;
 
-    private String shortDescription;
+    private String characterAbstract;
 
     @Lob
     private byte[] characterPortrait;
