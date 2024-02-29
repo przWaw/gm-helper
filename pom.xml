@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.pWaw</groupId>
-	<artifactId>mg-helper</artifactId>
+	<artifactId>gm-helper</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>mg-helper</name>
 	<description>Campaigns managing application for ttRPG</description>
