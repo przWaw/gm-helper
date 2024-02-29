@@ -15,9 +15,9 @@ import org.hibernate.internal.build.AllowNonPortable;
 @NoArgsConstructor
 public class Image {
 
-    private String fileType;
-
     private String name;
+
+    private String fileType;
 
     @Lob
     private byte[] imageData;

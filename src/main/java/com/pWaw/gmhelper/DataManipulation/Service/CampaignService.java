@@ -6,7 +6,6 @@ import com.pWaw.gmhelper.DataManipulation.Mappers.CampaignMapper;
 import com.pWaw.gmhelper.DataManipulation.Model.Campaign;
 import com.pWaw.gmhelper.DataManipulation.Repository.CampaignRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,7 +15,6 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class CampaignService {
 
     private final CampaignRepository campaignRepository;
