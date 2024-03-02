@@ -1,11 +1,10 @@
 package com.pWaw.gmhelper.DataManipulation.DTO;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class CharacterNoteDto {
-    private Long id;
-    private String content;
-    private String contentAbstract;
+@EqualsAndHashCode(callSuper = true)
+public class CharacterNoteDto extends NoteDto {
     private Long characterId;
 }

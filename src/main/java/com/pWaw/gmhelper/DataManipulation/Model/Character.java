@@ -18,10 +18,12 @@ public class Character {
 
     private String characterAbstract;
 
-    @Embedded
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "image_id")
     private Image characterPortrait;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "campaign_id")
     private Campaign campaign;
 
 }

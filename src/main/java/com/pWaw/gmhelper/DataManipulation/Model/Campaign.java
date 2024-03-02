@@ -13,7 +13,7 @@ public class Campaign {
 
     private String campaignName;
 
-    @Embedded
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "image_id")
     private Image campaignImage;
-
 }

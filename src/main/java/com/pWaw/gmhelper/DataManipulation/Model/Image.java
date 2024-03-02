@@ -1,19 +1,21 @@
 package com.pWaw.gmhelper.DataManipulation.Model;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Lob;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.internal.build.AllowNonPortable;
 
-@Embeddable
+@Entity
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Image {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
 
@@ -21,4 +23,6 @@ public class Image {
 
     @Lob
     private byte[] imageData;
+
+    private Long size;
 }

@@ -9,9 +9,11 @@ import java.util.List;
 public interface CharacterMapper {
 
     @Mapping(target = "campaign.id", source = "campaignId")
+    @Mapping(target = "characterPortrait.id", source = "portraitId")
     Character dtoToCharacter(CharacterDto characterDto);
 
     @Mapping(target = "campaignId", source = "campaign.id")
+    @Mapping(target = "portraitId", source = "characterPortrait.id")
     CharacterDto characterToDto(Character character);
 
     List<Character> dtoToCharacter(List<CharacterDto> characterDtos);
