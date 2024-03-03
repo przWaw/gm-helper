@@ -8,6 +8,8 @@ import com.pWaw.gmhelper.DataManipulation.Mappers.ImageMapper;
 import com.pWaw.gmhelper.DataManipulation.Model.Image;
 import com.pWaw.gmhelper.DataManipulation.Repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +19,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = "images")
 public class ImageService {
 
     private final ImageRepository imageRepository;
@@ -25,10 +28,13 @@ public class ImageService {
 
     public ImageDetails uploadImage(MultipartFile image) throws EmptyFileSendException {
         ImageDto dto = ImageDto.readFromMultipart(image);
+        System.out.println(dto.getFileType());
         Image imageToSave = imageMapper.dtoToImage(dto);
+        System.out.println(imageToSave.getFileType());
         return imageMapper.imageToDetails(imageRepository.save(imageToSave));
     }
 
+    @CachePut(key = "#id")
     public ImageDetails updateImage(Long id, MultipartFile image) throws ImageNotExistsException, EmptyFileSendException {
         Optional<Image> imageToUpdate = imageRepository.findById(id);
         if(imageToUpdate.isEmpty()) {
@@ -40,7 +46,7 @@ public class ImageService {
         return imageMapper.imageToDetails(imageRepository.save(imageToSave));
     }
 
-    @Cacheable(value = "images", key = "#id")
+    @Cacheable(key = "#id")
     public ImageDto getImage(Long id) throws ImageNotExistsException {
         Optional<Image> image = imageRepository.findById(id);
         if(image.isEmpty()) {
@@ -65,7 +71,7 @@ public class ImageService {
         }
     }
 
-    @Cacheable(value = "images", key = "#image.id")
+    @Cacheable(key = "#image.id")
     private ImageDto cacheImage(Image image) {
         return imageMapper.imageToDto(image);
     }
