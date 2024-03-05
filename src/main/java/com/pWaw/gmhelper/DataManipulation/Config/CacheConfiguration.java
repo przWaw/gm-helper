@@ -1,4 +1,4 @@
-package com.pWaw.gmhelper.DataManipulation.config;
+package com.pWaw.gmhelper.DataManipulation.Config;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import org.springframework.cache.CacheManager;

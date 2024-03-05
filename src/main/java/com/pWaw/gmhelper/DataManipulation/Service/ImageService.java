@@ -1,7 +1,7 @@
 package com.pWaw.gmhelper.DataManipulation.Service;
 
-import com.pWaw.gmhelper.DataManipulation.DTO.ImageDetails;
-import com.pWaw.gmhelper.DataManipulation.DTO.ImageDto;
+import com.pWaw.gmhelper.DataManipulation.DTO.Image.ImageDetails;
+import com.pWaw.gmhelper.DataManipulation.DTO.Image.ImageDto;
 import com.pWaw.gmhelper.DataManipulation.Exception.EmptyFileSendException;
 import com.pWaw.gmhelper.DataManipulation.Exception.ImageNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Mappers.ImageMapper;
@@ -9,6 +9,7 @@ import com.pWaw.gmhelper.DataManipulation.Model.Image;
 import com.pWaw.gmhelper.DataManipulation.Repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -55,6 +56,7 @@ public class ImageService {
         return imageMapper.imageToDto(image.get());
     }
 
+    @CacheEvict(key = "#id")
     public void deleteImage(Long id) {
         imageRepository.deleteById(id);
     }
@@ -64,11 +66,12 @@ public class ImageService {
         return imageMapper.imageToDetails(images);
     }
 
-    public void preloadCache(List<Long> ids) {
+    public List<ImageDetails> preloadCache(List<Long> ids) {
         List<Image> images = imageRepository.findAllByIdIn(ids);
         for(Image image : images) {
             cacheImage(image);
         }
+        return imageMapper.imageToDetails(images);
     }
 
     @Cacheable(key = "#image.id")

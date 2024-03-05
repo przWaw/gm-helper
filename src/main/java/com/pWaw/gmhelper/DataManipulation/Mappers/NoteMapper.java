@@ -1,8 +1,8 @@
 package com.pWaw.gmhelper.DataManipulation.Mappers;
 
-import com.pWaw.gmhelper.DataManipulation.DTO.CampaignNoteDto;
-import com.pWaw.gmhelper.DataManipulation.DTO.CharacterNoteDto;
-import com.pWaw.gmhelper.DataManipulation.DTO.NoteDto;
+import com.pWaw.gmhelper.DataManipulation.DTO.Note.CampaignNoteDto;
+import com.pWaw.gmhelper.DataManipulation.DTO.Note.CharacterNoteDto;
+import com.pWaw.gmhelper.DataManipulation.DTO.Note.NoteDto;
 import com.pWaw.gmhelper.DataManipulation.Model.Note;
 import com.pWaw.gmhelper.DataManipulation.Model.NoteImpl.CampaignNote;
 import com.pWaw.gmhelper.DataManipulation.Model.NoteImpl.CharacterNote;

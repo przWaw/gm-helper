@@ -1,4 +1,4 @@
-package com.pWaw.gmhelper.DataManipulation.DTO;
+package com.pWaw.gmhelper.DataManipulation.DTO.Campaign;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

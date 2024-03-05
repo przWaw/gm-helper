@@ -1,7 +1,7 @@
 package com.pWaw.gmhelper.DataManipulation.Mappers;
 
-import com.pWaw.gmhelper.DataManipulation.DTO.ImageDetails;
-import com.pWaw.gmhelper.DataManipulation.DTO.ImageDto;
+import com.pWaw.gmhelper.DataManipulation.DTO.Image.ImageDetails;
+import com.pWaw.gmhelper.DataManipulation.DTO.Image.ImageDto;
 import com.pWaw.gmhelper.DataManipulation.Model.Image;
 import org.mapstruct.Mapper;
 

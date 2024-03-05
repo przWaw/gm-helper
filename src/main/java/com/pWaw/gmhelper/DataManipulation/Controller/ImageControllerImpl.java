@@ -1,8 +1,8 @@
 package com.pWaw.gmhelper.DataManipulation.Controller;
 
 import com.pWaw.gmhelper.DataManipulation.Controller.Swagger.ImageController;
-import com.pWaw.gmhelper.DataManipulation.DTO.ImageDetails;
-import com.pWaw.gmhelper.DataManipulation.DTO.ImageDto;
+import com.pWaw.gmhelper.DataManipulation.DTO.Image.ImageDetails;
+import com.pWaw.gmhelper.DataManipulation.DTO.Image.ImageDto;
 import com.pWaw.gmhelper.DataManipulation.Exception.EmptyFileSendException;
 import com.pWaw.gmhelper.DataManipulation.Exception.ImageNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Service.ImageService;
@@ -48,9 +48,8 @@ public class ImageControllerImpl implements ImageController {
     }
 
     @Override
-    public ResponseEntity<Void> cacheImages(List<Long> idList) {
-        imageService.preloadCache(idList);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<List<ImageDetails>> cacheImages(List<Long> idList) {
+        return ResponseEntity.ok().body(imageService.preloadCache(idList));
     }
 
     @Override

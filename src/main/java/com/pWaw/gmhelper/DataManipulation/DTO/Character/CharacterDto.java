@@ -1,4 +1,4 @@
-package com.pWaw.gmhelper.DataManipulation.DTO;
+package com.pWaw.gmhelper.DataManipulation.DTO.Character;
 
 import com.pWaw.gmhelper.DataManipulation.Model.CharacterType;
 import lombok.Data;

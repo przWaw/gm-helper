@@ -1,4 +1,4 @@
-package com.pWaw.gmhelper.DataManipulation.DTO;
+package com.pWaw.gmhelper.DataManipulation.DTO.Image;
 
 import lombok.Data;
 

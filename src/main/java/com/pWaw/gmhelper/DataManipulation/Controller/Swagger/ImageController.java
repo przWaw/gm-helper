@@ -1,6 +1,6 @@
 package com.pWaw.gmhelper.DataManipulation.Controller.Swagger;
 
-import com.pWaw.gmhelper.DataManipulation.DTO.ImageDetails;
+import com.pWaw.gmhelper.DataManipulation.DTO.Image.ImageDetails;
 
 import com.pWaw.gmhelper.DataManipulation.Exception.EmptyFileSendException;
 import com.pWaw.gmhelper.DataManipulation.Exception.ImageNotExistsException;
@@ -32,7 +32,7 @@ public interface ImageController {
     ResponseEntity<Void> deleteImage(@PathVariable Long id);
 
     @GetMapping("/list/{idList}")
-    ResponseEntity<Void> cacheImages(@PathVariable List<Long> idList);
+    ResponseEntity<List<ImageDetails>> cacheImages(@PathVariable List<Long> idList);
 
     @GetMapping("list/details")
     ResponseEntity<List<ImageDetails>> getAllImagesInfo();

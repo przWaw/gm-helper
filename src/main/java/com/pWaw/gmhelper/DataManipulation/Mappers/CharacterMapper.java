@@ -1,6 +1,6 @@
 package com.pWaw.gmhelper.DataManipulation.Mappers;
 
-import com.pWaw.gmhelper.DataManipulation.DTO.CharacterDto;
+import com.pWaw.gmhelper.DataManipulation.DTO.Character.CharacterDto;
 import com.pWaw.gmhelper.DataManipulation.Model.Character;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

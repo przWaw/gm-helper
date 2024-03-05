@@ -1,7 +1,7 @@
 package com.pWaw.gmhelper.DataManipulation.Service;
 
-import com.pWaw.gmhelper.DataManipulation.DTO.CampaignDto;
-import com.pWaw.gmhelper.DataManipulation.DTO.ImageDto;
+import com.pWaw.gmhelper.DataManipulation.DTO.Campaign.CampaignDto;
+import com.pWaw.gmhelper.DataManipulation.DTO.Image.ImageDto;
 import com.pWaw.gmhelper.DataManipulation.Exception.CampaignNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Exception.EmptyFileSendException;
 import com.pWaw.gmhelper.DataManipulation.Mappers.CampaignMapper;

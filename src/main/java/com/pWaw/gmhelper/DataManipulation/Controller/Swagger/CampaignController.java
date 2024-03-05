@@ -1,6 +1,6 @@
 package com.pWaw.gmhelper.DataManipulation.Controller.Swagger;
 
-import com.pWaw.gmhelper.DataManipulation.DTO.CampaignDto;
+import com.pWaw.gmhelper.DataManipulation.DTO.Campaign.CampaignDto;
 import com.pWaw.gmhelper.DataManipulation.Exception.CampaignNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Exception.EmptyFileSendException;
 import org.springframework.http.MediaType;

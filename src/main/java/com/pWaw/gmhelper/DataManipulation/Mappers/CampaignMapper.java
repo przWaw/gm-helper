@@ -1,6 +1,6 @@
 package com.pWaw.gmhelper.DataManipulation.Mappers;
 
-import com.pWaw.gmhelper.DataManipulation.DTO.CampaignDto;
+import com.pWaw.gmhelper.DataManipulation.DTO.Campaign.CampaignDto;
 import com.pWaw.gmhelper.DataManipulation.Model.Campaign;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
