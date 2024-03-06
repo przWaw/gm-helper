@@ -31,7 +31,8 @@ public class CampaignService {
         if (image.isEmpty()) {
             campaign.setCampaignImage(null);
         } else {
-            campaign.setCampaignImage(imageMapper.dtoToImage(ImageDto.readFromMultipart(image)));
+            Image campaignImage = imageRepository.save(imageMapper.dtoToImage(ImageDto.readFromMultipart(image)));
+            campaign.setCampaignImage(campaignImage);
         }
         return campaignMapper.campaignToDto(campaignRepository.save(campaign));
     }

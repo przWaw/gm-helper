@@ -13,7 +13,7 @@ public class Campaign {
 
     private String campaignName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "image_id")
     private Image campaignImage;
 }

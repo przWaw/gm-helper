@@ -22,7 +22,7 @@ public class Character {
     @JoinColumn(name = "image_id")
     private Image characterPortrait;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "campaign_id")
     private Campaign campaign;
 
