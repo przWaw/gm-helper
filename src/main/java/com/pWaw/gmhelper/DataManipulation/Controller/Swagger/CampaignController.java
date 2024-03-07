@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.print.attribute.standard.Media;
 import java.util.List;
 
 @RequestMapping(CampaignController.DataPath.ROOT)
@@ -21,8 +22,11 @@ public interface CampaignController {
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     ResponseEntity<CampaignDto> createCampaign(@RequestPart CampaignDto campaignDto, @RequestPart(required = false) MultipartFile image) throws EmptyFileSendException;
 
-    @PutMapping()
+    @PutMapping
     ResponseEntity<CampaignDto> updateCampaignData(@RequestBody CampaignDto campaignDto) throws CampaignNotExistsException;
+
+    @PutMapping(value = "{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    ResponseEntity<CampaignDto> updateCampaignImage(@PathVariable Long id, @RequestPart MultipartFile image) throws EmptyFileSendException, CampaignNotExistsException;
 
     @GetMapping("{id}")
     ResponseEntity<CampaignDto> getCampaignById(@PathVariable Long id) throws CampaignNotExistsException;
