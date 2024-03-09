@@ -20,17 +20,12 @@ public class CampaignControllerImpl implements CampaignController {
     private final CampaignService campaignService;
     @Override
     public ResponseEntity<CampaignDto> createCampaign(CampaignDto campaignDto, MultipartFile image) throws EmptyFileSendException {
-        return new ResponseEntity<CampaignDto>(campaignService.createCampaign(campaignDto, image), HttpStatus.CREATED);
+        return new ResponseEntity<>(campaignService.createCampaign(campaignDto, image), HttpStatus.CREATED);
     }
 
     @Override
     public ResponseEntity<CampaignDto> updateCampaignData(CampaignDto campaignDto) throws CampaignNotExistsException {
         return ResponseEntity.ok().body(campaignService.updateCampaignData(campaignDto));
-    }
-
-    @Override
-    public ResponseEntity<CampaignDto> updateCampaignImage(Long id, MultipartFile image) throws EmptyFileSendException, CampaignNotExistsException {
-        return ResponseEntity.ok().body(campaignService.updateCampaignImage(id, image));
     }
 
     @Override

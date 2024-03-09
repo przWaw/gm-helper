@@ -10,6 +10,7 @@ import com.pWaw.gmhelper.DataManipulation.Model.Campaign;
 import com.pWaw.gmhelper.DataManipulation.Model.Image;
 import com.pWaw.gmhelper.DataManipulation.Repository.CampaignRepository;
 import com.pWaw.gmhelper.DataManipulation.Repository.ImageRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,6 +38,7 @@ public class CampaignService {
         return campaignMapper.campaignToDto(campaignRepository.save(campaign));
     }
 
+    @Transactional
     public void deleteCampaign(Long id) {
         campaignRepository.deleteById(id);
     }
@@ -57,22 +59,6 @@ public class CampaignService {
         Campaign campaignToUpdate = campaignMapper.dtoToCampaign(campaignDto);
         campaignToUpdate.setCampaignImage(image);
         return campaignMapper.campaignToDto(campaignRepository.save(campaignToUpdate));
-    }
-
-    public CampaignDto updateCampaignImage(Long id, MultipartFile image) throws CampaignNotExistsException, EmptyFileSendException {
-        Optional<Campaign> campaign = campaignRepository.findById(id);
-        if(campaign.isEmpty()) {
-            throw new CampaignNotExistsException();
-        }
-        Campaign campaignToUpdate = campaign.get();
-        if (image.isEmpty()) {
-            campaignToUpdate.setCampaignImage(null);
-        } else {
-            Image campaignImage = imageRepository.save(imageMapper.dtoToImage(ImageDto.readFromMultipart(image)));
-            campaignToUpdate.setCampaignImage(campaignImage);
-        }
-        return campaignMapper.campaignToDto(campaignRepository.save(campaignToUpdate));
-        // TODO: remove old image
     }
 
     public CampaignDto getCampaign(Long id) throws CampaignNotExistsException {

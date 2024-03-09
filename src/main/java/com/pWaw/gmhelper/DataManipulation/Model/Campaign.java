@@ -13,7 +13,7 @@ public class Campaign {
 
     private String campaignName;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})
     @JoinColumn(name = "image_id")
     private Image campaignImage;
 }

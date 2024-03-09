@@ -114,6 +114,7 @@ class CampaignServiceTest {
         CampaignDto result = campaignService.createCampaign(input, image);
 
         assertAll(() -> {
+            assertEquals(CampaignDto.class, result.getClass());
             verify(campaignMapper).dtoToCampaign(input);
             verify(campaignMapper).campaignToDto(any(Campaign.class));
             verify(campaignRepository).save(any());
@@ -144,6 +145,7 @@ class CampaignServiceTest {
         CampaignDto result = campaignService.createCampaign(input, image);
 
         assertAll(() -> {
+            assertEquals(CampaignDto.class, result.getClass());
             verify(campaignMapper).dtoToCampaign(input);
             verify(campaignMapper).campaignToDto(any(Campaign.class));
             verify(campaignRepository).save(any());
@@ -218,58 +220,6 @@ class CampaignServiceTest {
         assertAll(() -> {
             assertThrows(CampaignNotExistsException.class, () -> campaignService.updateCampaignData(input));
             verify(campaignRepository).findById(any());
-        });
-    }
-
-    @Test
-    public void updateCampaignImage_shouldReturnCampaignDto_imageProvided() throws EmptyFileSendException, CampaignNotExistsException {
-        Long id = 1L;
-        MultipartFile image = new MockMultipartFile("filename", new byte[5]);
-
-        when(campaignRepository.findById(any())).thenReturn(Optional.of(new Campaign()));
-        when(imageRepository.save(any())).thenReturn(new Image());
-        when(campaignMapper.campaignToDto(any(Campaign.class))).thenReturn(new CampaignDto());
-        when(campaignRepository.save(any())).thenReturn(new Campaign());
-
-        campaignService.updateCampaignImage(id, image);
-
-        assertAll(() -> {
-            verify(campaignRepository).findById(any());
-            verify(campaignMapper).campaignToDto(any(Campaign.class));
-            verify(imageRepository).save(any());
-            verify(campaignRepository).save(any());
-        });
-    }
-
-    @Test
-    public void updateCampaignImage_shouldReturnCampaignDto() throws EmptyFileSendException, CampaignNotExistsException {
-        Long id = 1L;
-        MultipartFile image = new MockMultipartFile("filename", new byte[0]);
-
-        when(campaignRepository.findById(any())).thenReturn(Optional.of(new Campaign()));
-        when(campaignMapper.campaignToDto(any(Campaign.class))).thenReturn(new CampaignDto());
-        when(campaignRepository.save(any())).thenReturn(new Campaign());
-
-        campaignService.updateCampaignImage(id, image);
-
-        assertAll(() -> {
-            verify(campaignRepository).findById(any());
-            verify(campaignMapper).campaignToDto(any(Campaign.class));
-            verify(imageRepository, times(0)).save(any());
-            verify(campaignRepository).save(any());
-        });
-    }
-
-    @Test
-    public void updateCampaignImage_shouldThrowException_wrongCampaignIdProvided() {
-        Long id = 1L;
-        MultipartFile image = new MockMultipartFile("filename", new byte[0]);
-
-        when(campaignRepository.findById(any())).thenReturn(Optional.empty());
-
-        assertAll(() -> {
-            assertThrows(CampaignNotExistsException.class, () -> campaignService.updateCampaignImage(id, image));
-            verify(campaignRepository).findById(id);
         });
     }
 
