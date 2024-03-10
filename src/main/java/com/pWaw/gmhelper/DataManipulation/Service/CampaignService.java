@@ -74,3 +74,5 @@ public class CampaignService {
     }
 
 }
+
+// TODO: add method to add image if campaign have null image

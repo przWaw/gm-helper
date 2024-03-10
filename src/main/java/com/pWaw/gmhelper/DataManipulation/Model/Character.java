@@ -22,16 +22,16 @@ public class Character {
 
     private String characterAbstract;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE})
+    @ManyToOne(cascade = {CascadeType.REMOVE})
     @JoinColumn(name = "image_id")
     private Image characterPortrait;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "campaign_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Campaign campaign;
 
-    @ElementCollection(fetch = FetchType.LAZY)
+    @ElementCollection
     private List<String> characterDescription;
 
 }

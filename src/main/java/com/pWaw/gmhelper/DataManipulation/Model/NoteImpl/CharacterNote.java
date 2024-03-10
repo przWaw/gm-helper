@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @DiscriminatorValue("character")
@@ -15,6 +17,7 @@ public class CharacterNote extends Note {
 
     @ManyToOne
     @JoinColumn(name = "character_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Character character;
 
 }

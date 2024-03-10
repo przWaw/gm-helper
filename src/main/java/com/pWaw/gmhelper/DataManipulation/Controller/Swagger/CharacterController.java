@@ -18,8 +18,8 @@ public interface CharacterController {
         public static final String ROOT = "api/gm-helper/data/character/";
     }
 
-    @GetMapping
-    ResponseEntity<CharacterDto> getCharacter(Long id) throws CharacterNotExistsException;
+    @GetMapping("{id}")
+    ResponseEntity<CharacterDto> getCharacter(@PathVariable Long id) throws CharacterNotExistsException;
 
     @GetMapping("campaign/{id}")
     ResponseEntity<List<CharacterDto>> getAllCharactersFromCampaign(Long campaignId);
@@ -33,6 +33,6 @@ public interface CharacterController {
     @PutMapping
     ResponseEntity<CharacterDto> updateCharacter(@RequestBody CharacterDto characterDto) throws CharacterNotExistsException;
 
-    @DeleteMapping
-    ResponseEntity<Void> deleteCharacter(Long id);
+    @DeleteMapping("{id}")
+    ResponseEntity<Void> deleteCharacter(@PathVariable Long id);
 }

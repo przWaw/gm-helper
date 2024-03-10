@@ -79,3 +79,5 @@ public class CharacterService {
     }
 
 }
+
+// TODO: add method to add image if character have null image

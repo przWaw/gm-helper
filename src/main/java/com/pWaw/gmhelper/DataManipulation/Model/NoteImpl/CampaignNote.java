@@ -7,7 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @DiscriminatorValue("campaign")
@@ -16,6 +17,7 @@ public class CampaignNote extends Note {
 
     @ManyToOne
     @JoinColumn(name = "campaign_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Campaign campaign;
 
 }
