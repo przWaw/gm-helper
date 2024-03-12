@@ -22,11 +22,11 @@ public class Character {
 
     private String characterAbstract;
 
-    @ManyToOne(cascade = {CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn(name = "image_id")
     private Image characterPortrait;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "campaign_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Campaign campaign;

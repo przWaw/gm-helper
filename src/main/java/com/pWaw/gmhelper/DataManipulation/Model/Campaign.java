@@ -13,7 +13,7 @@ public class Campaign {
 
     private String campaignName;
 
-    @OneToOne(cascade = {CascadeType.REMOVE})
+    @ManyToOne
     @JoinColumn(name = "image_id")
     private Image campaignImage;
 }
