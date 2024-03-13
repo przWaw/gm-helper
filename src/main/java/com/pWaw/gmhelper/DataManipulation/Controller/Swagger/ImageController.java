@@ -16,7 +16,7 @@ public interface ImageController {
 
     class DataPath{
         private DataPath(){}
-        public static final String ROOT = "api/gm-helper/data/image/";
+        public static final String ROOT = "api/gm-helper/data/images/";
     }
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -31,9 +31,9 @@ public interface ImageController {
     @DeleteMapping("{id}")
     ResponseEntity<Void> deleteImage(@PathVariable Long id);
 
-    @GetMapping("/list/{idList}")
+    @GetMapping("{idList}")
     ResponseEntity<List<ImageDetails>> cacheImages(@PathVariable List<Long> idList);
 
-    @GetMapping("list/details")
+    @GetMapping
     ResponseEntity<List<ImageDetails>> getAllImagesInfo();
 }

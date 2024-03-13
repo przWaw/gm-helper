@@ -2,11 +2,8 @@ package com.pWaw.gmhelper.DataManipulation.Controller.Swagger;
 
 import com.pWaw.gmhelper.DataManipulation.DTO.Character.CharacterDto;
 import com.pWaw.gmhelper.DataManipulation.Exception.CharacterNotExistsException;
-import com.pWaw.gmhelper.DataManipulation.Exception.EmptyFileSendException;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -15,7 +12,7 @@ public interface CharacterController {
 
     class DataPath {
         private DataPath() {}
-        public static final String ROOT = "api/gm-helper/data/character/";
+        public static final String ROOT = "api/gm-helper/data/characters/";
     }
 
     @GetMapping("{id}")
@@ -24,11 +21,11 @@ public interface CharacterController {
     @GetMapping("campaign/{id}")
     ResponseEntity<List<CharacterDto>> getAllCharactersFromCampaign(Long campaignId);
 
-    @GetMapping("all")
+    @GetMapping
     ResponseEntity<List<CharacterDto>> getAllCharacters();
 
-    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    ResponseEntity<CharacterDto> addCharacter(@RequestPart CharacterDto characterDto,  @RequestPart(required = false) MultipartFile image) throws EmptyFileSendException;
+    @PostMapping
+    ResponseEntity<CharacterDto> addCharacter(@RequestBody CharacterDto characterDto);
 
     @PutMapping
     ResponseEntity<CharacterDto> updateCharacter(@RequestBody CharacterDto characterDto) throws CharacterNotExistsException;

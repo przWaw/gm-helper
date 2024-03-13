@@ -1,18 +1,14 @@
 package com.pWaw.gmhelper.DataManipulation.Service;
 
 import com.pWaw.gmhelper.DataManipulation.DTO.Character.CharacterDto;
-import com.pWaw.gmhelper.DataManipulation.DTO.Image.ImageDto;
 import com.pWaw.gmhelper.DataManipulation.Exception.CharacterNotExistsException;
-import com.pWaw.gmhelper.DataManipulation.Exception.EmptyFileSendException;
 import com.pWaw.gmhelper.DataManipulation.Mappers.CharacterMapper;
 import com.pWaw.gmhelper.DataManipulation.Mappers.ImageMapper;
 import com.pWaw.gmhelper.DataManipulation.Model.Character;
-import com.pWaw.gmhelper.DataManipulation.Model.Image;
 import com.pWaw.gmhelper.DataManipulation.Repository.CharacterRepository;
 import com.pWaw.gmhelper.DataManipulation.Repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -44,14 +40,8 @@ public class CharacterService {
         return characterMapper.characterToDto(characters);
     }
 
-    public CharacterDto createCharacter(CharacterDto characterDto, MultipartFile image) throws EmptyFileSendException {
+    public CharacterDto createCharacter(CharacterDto characterDto) {
         Character character = characterMapper.dtoToCharacter(characterDto);
-        if(image.isEmpty()) {
-            character.setCharacterPortrait(null);
-        } else {
-            Image characterPortrait = imageRepository.save(imageMapper.dtoToImage(ImageDto.readFromMultipart(image)));
-            character.setCharacterPortrait(characterPortrait);
-        }
         return characterMapper.characterToDto(characterRepository.save(character));
     }
 
@@ -61,16 +51,7 @@ public class CharacterService {
             throw new CharacterNotExistsException();
         }
 
-        Image image;
-        if(character.get().getCharacterPortrait() != null) {
-            Long imageId = character.get().getCharacterPortrait().getId();
-            image = imageRepository.findById(imageId).orElse(null);
-        } else {
-            image = null;
-        }
-
         Character characterToUpdate = characterMapper.dtoToCharacter(characterDto);
-        characterToUpdate.setCharacterPortrait(image);
         return characterMapper.characterToDto(characterRepository.save(characterToUpdate));
     }
 

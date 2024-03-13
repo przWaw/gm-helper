@@ -3,13 +3,11 @@ package com.pWaw.gmhelper.DataManipulation.Controller;
 import com.pWaw.gmhelper.DataManipulation.Controller.Swagger.CharacterController;
 import com.pWaw.gmhelper.DataManipulation.DTO.Character.CharacterDto;
 import com.pWaw.gmhelper.DataManipulation.Exception.CharacterNotExistsException;
-import com.pWaw.gmhelper.DataManipulation.Exception.EmptyFileSendException;
 import com.pWaw.gmhelper.DataManipulation.Service.CharacterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -35,8 +33,8 @@ public class CharacterControllerImpl implements CharacterController {
     }
 
     @Override
-    public ResponseEntity<CharacterDto> addCharacter(CharacterDto characterDto, MultipartFile image) throws EmptyFileSendException {
-        return new ResponseEntity<>(characterService.createCharacter(characterDto, image), HttpStatus.CREATED);
+    public ResponseEntity<CharacterDto> addCharacter(CharacterDto characterDto) {
+        return new ResponseEntity<>(characterService.createCharacter(characterDto), HttpStatus.CREATED);
     }
 
     @Override
