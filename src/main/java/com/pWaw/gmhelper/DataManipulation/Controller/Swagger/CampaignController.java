@@ -2,11 +2,8 @@ package com.pWaw.gmhelper.DataManipulation.Controller.Swagger;
 
 import com.pWaw.gmhelper.DataManipulation.DTO.Campaign.CampaignDto;
 import com.pWaw.gmhelper.DataManipulation.Exception.CampaignNotExistsException;
-import com.pWaw.gmhelper.DataManipulation.Exception.EmptyFileSendException;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -15,11 +12,11 @@ public interface CampaignController {
 
     class DataPath {
         private DataPath() {}
-        public static final String ROOT = "api/gm-helper/data/campaign/";
+        public static final String ROOT = "api/gm-helper/data/campaigns/";
     }
 
-    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    ResponseEntity<CampaignDto> createCampaign(@RequestPart CampaignDto campaignDto, @RequestPart(required = false) MultipartFile image) throws EmptyFileSendException;
+    @PostMapping
+    ResponseEntity<CampaignDto> createCampaign(@RequestBody CampaignDto campaignDto);
 
     @PutMapping
     ResponseEntity<CampaignDto> updateCampaignData(@RequestBody CampaignDto campaignDto) throws CampaignNotExistsException;
@@ -27,7 +24,7 @@ public interface CampaignController {
     @GetMapping("{id}")
     ResponseEntity<CampaignDto> getCampaignById(@PathVariable Long id) throws CampaignNotExistsException;
 
-    @GetMapping("all")
+    @GetMapping()
     ResponseEntity<List<CampaignDto>> getAllCampaigns();
     @DeleteMapping("{id}")
     ResponseEntity<Void> deleteCampaign(@PathVariable Long id);
