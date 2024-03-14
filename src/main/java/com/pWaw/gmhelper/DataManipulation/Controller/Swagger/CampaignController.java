@@ -27,7 +27,7 @@ public interface CampaignController {
     @PostMapping
     ResponseEntity<CampaignDto> createCampaign(@RequestBody CampaignDto campaignDto);
 
-    @Operation(summary = "Update campaign", description = "Put with body containing update form of campaign")
+    @Operation(summary = "Update campaign", description = "Put with body containing updated form of campaign")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Campaign successfully updated"),
             @ApiResponse(responseCode = "404", description = "Campaign with given id was not found in database")
@@ -46,7 +46,6 @@ public interface CampaignController {
     @Operation(summary = "Get all campaigns", description = "Get list of all present campaigns in database")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "List of all campaigns successfully retrieved"),
-            @ApiResponse(responseCode = "404", description = "Campaign with given id was not found in database")
     })
     @GetMapping
     ResponseEntity<List<CampaignDto>> getAllCampaigns();
