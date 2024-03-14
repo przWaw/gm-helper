@@ -3,8 +3,8 @@ package com.pWaw.gmhelper.DataManipulation.Controller;
 import com.pWaw.gmhelper.DataManipulation.Controller.Swagger.ImageController;
 import com.pWaw.gmhelper.DataManipulation.DTO.Image.ImageDetails;
 import com.pWaw.gmhelper.DataManipulation.DTO.Image.ImageDto;
-import com.pWaw.gmhelper.DataManipulation.Exception.EmptyFileSendException;
-import com.pWaw.gmhelper.DataManipulation.Exception.ImageNotExistsException;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.EmptyFileSendException;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.ImageNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Service.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -24,7 +24,7 @@ public class ImageControllerImpl implements ImageController {
 
     @Override
     public ResponseEntity<ImageDetails> uploadImage(MultipartFile image) throws EmptyFileSendException {
-        return new ResponseEntity<ImageDetails>(imageService.uploadImage(image), HttpStatus.CREATED);
+        return new ResponseEntity<>(imageService.uploadImage(image), HttpStatus.CREATED);
     }
 
     @Override

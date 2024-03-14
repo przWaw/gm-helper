@@ -2,8 +2,9 @@ package com.pWaw.gmhelper.DataManipulation.Controller.Swagger;
 
 import com.pWaw.gmhelper.DataManipulation.DTO.Image.ImageDetails;
 
-import com.pWaw.gmhelper.DataManipulation.Exception.EmptyFileSendException;
-import com.pWaw.gmhelper.DataManipulation.Exception.ImageNotExistsException;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.EmptyFileSendException;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.ImageNotExistsException;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RequestMapping(ImageController.DataPath.ROOT)
+@Tag(name = "Image Controller", description = "Class for image data manipulation.")
 public interface ImageController {
 
     class DataPath{

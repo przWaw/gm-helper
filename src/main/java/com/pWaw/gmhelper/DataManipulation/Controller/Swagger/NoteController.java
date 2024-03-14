@@ -2,13 +2,15 @@ package com.pWaw.gmhelper.DataManipulation.Controller.Swagger;
 
 import com.pWaw.gmhelper.DataManipulation.DTO.Note.CampaignNoteDto;
 import com.pWaw.gmhelper.DataManipulation.DTO.Note.CharacterNoteDto;
-import com.pWaw.gmhelper.DataManipulation.Exception.NoteNotExistsException;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.NoteNotExistsException;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping(NoteController.DataPath.ROOT)
+@Tag(name = "Note Controller", description = "Class for note data manipulation")
 public interface NoteController {
 
     class DataPath{
@@ -16,10 +18,10 @@ public interface NoteController {
         public static final String ROOT = "api/gm-helper/data/note/";
     }
 
-    @GetMapping("campaign/{id}")
+    @GetMapping("{id}/campaign")
     ResponseEntity<List<CampaignNoteDto>> getNotesForCampaign(@PathVariable Long id);
 
-    @GetMapping("character/{id}")
+    @GetMapping("{id}/character")
     ResponseEntity<List<CharacterNoteDto>> getNotesForCharacter(@PathVariable Long id);
 
     @PostMapping("campaign")

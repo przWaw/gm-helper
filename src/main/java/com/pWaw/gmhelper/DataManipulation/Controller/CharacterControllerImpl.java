@@ -2,7 +2,7 @@ package com.pWaw.gmhelper.DataManipulation.Controller;
 
 import com.pWaw.gmhelper.DataManipulation.Controller.Swagger.CharacterController;
 import com.pWaw.gmhelper.DataManipulation.DTO.Character.CharacterDto;
-import com.pWaw.gmhelper.DataManipulation.Exception.CharacterNotExistsException;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.CharacterNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Service.CharacterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

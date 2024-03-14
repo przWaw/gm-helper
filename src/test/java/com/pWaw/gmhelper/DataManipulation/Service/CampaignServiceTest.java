@@ -1,7 +1,7 @@
 package com.pWaw.gmhelper.DataManipulation.Service;
 
 import com.pWaw.gmhelper.DataManipulation.DTO.Campaign.CampaignDto;
-import com.pWaw.gmhelper.DataManipulation.Exception.CampaignNotExistsException;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.CampaignNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Mappers.CampaignMapper;
 import com.pWaw.gmhelper.DataManipulation.Model.Campaign;
 import com.pWaw.gmhelper.DataManipulation.Model.Image;

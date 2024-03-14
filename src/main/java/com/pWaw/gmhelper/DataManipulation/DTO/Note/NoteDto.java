@@ -7,6 +7,6 @@ import java.util.List;
 @Data
 public class NoteDto {
     private Long id;
-    private String content;
-    private List<String> contentAbstract;
+    private String contentAbstract;
+    private List<String> content;
 }

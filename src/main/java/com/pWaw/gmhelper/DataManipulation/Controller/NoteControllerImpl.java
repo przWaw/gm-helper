@@ -3,7 +3,7 @@ package com.pWaw.gmhelper.DataManipulation.Controller;
 import com.pWaw.gmhelper.DataManipulation.Controller.Swagger.NoteController;
 import com.pWaw.gmhelper.DataManipulation.DTO.Note.CampaignNoteDto;
 import com.pWaw.gmhelper.DataManipulation.DTO.Note.CharacterNoteDto;
-import com.pWaw.gmhelper.DataManipulation.Exception.NoteNotExistsException;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.NoteNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Service.NoteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

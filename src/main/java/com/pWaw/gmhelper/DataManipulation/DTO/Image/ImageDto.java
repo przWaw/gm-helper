@@ -1,6 +1,6 @@
 package com.pWaw.gmhelper.DataManipulation.DTO.Image;
 
-import com.pWaw.gmhelper.DataManipulation.Exception.EmptyFileSendException;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.EmptyFileSendException;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,7 +25,7 @@ public class ImageDto {
                     .imageData(image.getBytes())
                     .build();
         } catch (IOException e) {
-            throw new EmptyFileSendException();
+            throw new EmptyFileSendException("Image reading failed because: " + e.getMessage());
         }
     }
 }

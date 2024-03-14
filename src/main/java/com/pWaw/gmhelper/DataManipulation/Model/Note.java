@@ -15,9 +15,9 @@ public class Note {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String content;
+    private String contentAbstract;
 
     @ElementCollection
-    private List<String> contentAbstract;
+    private List<String> content;
 
 }

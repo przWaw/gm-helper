@@ -2,7 +2,7 @@ package com.pWaw.gmhelper.DataManipulation.Service;
 
 import com.pWaw.gmhelper.DataManipulation.DTO.Note.CampaignNoteDto;
 import com.pWaw.gmhelper.DataManipulation.DTO.Note.CharacterNoteDto;
-import com.pWaw.gmhelper.DataManipulation.Exception.NoteNotExistsException;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.NoteNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Mappers.NoteMapper;
 import com.pWaw.gmhelper.DataManipulation.Model.NoteImpl.CampaignNote;
 import com.pWaw.gmhelper.DataManipulation.Model.NoteImpl.CharacterNote;
@@ -45,7 +45,7 @@ public class NoteService {
 
     public CampaignNoteDto updateCampaignNote(CampaignNoteDto noteDto) throws NoteNotExistsException {
         if (!noteRepository.existsById(noteDto.getId())) {
-            throw new NoteNotExistsException();
+            throw new NoteNotExistsException("Wrong id was provided during update operation, note does not exists");
         }
         CampaignNote campaignNote = noteMapper.dtoToCampaignNote(noteDto);
         return noteMapper.campaignNoteToDto(campaignNoteRepository.save(campaignNote));
@@ -53,7 +53,7 @@ public class NoteService {
 
     public CharacterNoteDto updateCharacterNote(CharacterNoteDto noteDto) throws NoteNotExistsException {
         if (!noteRepository.existsById(noteDto.getId())) {
-            throw new NoteNotExistsException();
+            throw new NoteNotExistsException("Wrong id was provided during update operation, note does not exists");
         }
         CharacterNote characterNote = noteMapper.dtoToCharacterNote(noteDto);
         return noteMapper.characterNoteToDto(characterNoteRepository.save(characterNote));

@@ -2,8 +2,8 @@ package com.pWaw.gmhelper.DataManipulation.Service;
 
 import com.pWaw.gmhelper.DataManipulation.DTO.Image.ImageDetails;
 import com.pWaw.gmhelper.DataManipulation.DTO.Image.ImageDto;
-import com.pWaw.gmhelper.DataManipulation.Exception.EmptyFileSendException;
-import com.pWaw.gmhelper.DataManipulation.Exception.ImageNotExistsException;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.EmptyFileSendException;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.ImageNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Mappers.ImageMapper;
 import com.pWaw.gmhelper.DataManipulation.Model.Image;
 import com.pWaw.gmhelper.DataManipulation.Repository.ImageRepository;
@@ -39,7 +39,7 @@ public class ImageService {
     public ImageDetails updateImage(Long id, MultipartFile image) throws ImageNotExistsException, EmptyFileSendException {
         Optional<Image> imageToUpdate = imageRepository.findById(id);
         if(imageToUpdate.isEmpty()) {
-            throw new ImageNotExistsException();
+            throw new ImageNotExistsException("Wrong id was provided during get operation, image does not exists");
         }
         ImageDto dto = ImageDto.readFromMultipart(image);
         dto.setId(imageToUpdate.get().getId());
@@ -51,7 +51,7 @@ public class ImageService {
     public ImageDto getImage(Long id) throws ImageNotExistsException {
         Optional<Image> image = imageRepository.findById(id);
         if(image.isEmpty()) {
-            throw new ImageNotExistsException();
+            throw new ImageNotExistsException("Wrong id was provided during update operation, image does not exists");
         }
         return imageMapper.imageToDto(image.get());
     }

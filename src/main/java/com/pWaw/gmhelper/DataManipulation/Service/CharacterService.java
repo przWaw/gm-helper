@@ -1,12 +1,10 @@
 package com.pWaw.gmhelper.DataManipulation.Service;
 
 import com.pWaw.gmhelper.DataManipulation.DTO.Character.CharacterDto;
-import com.pWaw.gmhelper.DataManipulation.Exception.CharacterNotExistsException;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.CharacterNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Mappers.CharacterMapper;
-import com.pWaw.gmhelper.DataManipulation.Mappers.ImageMapper;
 import com.pWaw.gmhelper.DataManipulation.Model.Character;
 import com.pWaw.gmhelper.DataManipulation.Repository.CharacterRepository;
-import com.pWaw.gmhelper.DataManipulation.Repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +17,11 @@ public class CharacterService {
 
     private final CharacterRepository characterRepository;
     private final CharacterMapper characterMapper;
-    private final ImageRepository imageRepository;
-    private final ImageMapper imageMapper;
 
     public CharacterDto getCharacterById(Long id) throws CharacterNotExistsException {
         Optional<Character> character = characterRepository.findById(id);
         if(character.isEmpty()) {
-            throw new CharacterNotExistsException();
+            throw new CharacterNotExistsException("Wrong id was provided during get operation, character does not exists");
         }
         return characterMapper.characterToDto(character.get());
     }
@@ -48,7 +44,7 @@ public class CharacterService {
     public CharacterDto updateCharacter(CharacterDto characterDto) throws CharacterNotExistsException {
         Optional<Character> character = characterRepository.findById(characterDto.getId());
         if(character.isEmpty()) {
-            throw new CharacterNotExistsException();
+            throw new CharacterNotExistsException("Wrong id was provided during update operation, character does not exists");
         }
 
         Character characterToUpdate = characterMapper.dtoToCharacter(characterDto);
@@ -60,5 +56,3 @@ public class CharacterService {
     }
 
 }
-
-// TODO: add method to add image if character have null image

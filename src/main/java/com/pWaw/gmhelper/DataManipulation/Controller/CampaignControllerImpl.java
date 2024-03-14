@@ -2,7 +2,7 @@ package com.pWaw.gmhelper.DataManipulation.Controller;
 
 import com.pWaw.gmhelper.DataManipulation.Controller.Swagger.CampaignController;
 import com.pWaw.gmhelper.DataManipulation.DTO.Campaign.CampaignDto;
-import com.pWaw.gmhelper.DataManipulation.Exception.CampaignNotExistsException;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.CampaignNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Service.CampaignService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

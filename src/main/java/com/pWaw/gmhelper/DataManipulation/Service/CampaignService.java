@@ -1,7 +1,7 @@
 package com.pWaw.gmhelper.DataManipulation.Service;
 
 import com.pWaw.gmhelper.DataManipulation.DTO.Campaign.CampaignDto;
-import com.pWaw.gmhelper.DataManipulation.Exception.CampaignNotExistsException;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.CampaignNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Mappers.CampaignMapper;
 import com.pWaw.gmhelper.DataManipulation.Model.Campaign;
 import com.pWaw.gmhelper.DataManipulation.Repository.CampaignRepository;
@@ -32,7 +32,7 @@ public class CampaignService {
     public CampaignDto updateCampaignData(CampaignDto campaignDto) throws CampaignNotExistsException {
         Optional<Campaign> campaign = campaignRepository.findById(campaignDto.getId());
         if(campaign.isEmpty()) {
-            throw new CampaignNotExistsException();
+            throw new CampaignNotExistsException("Wrong id was provided during update operation, campaign does not exists");
         }
 
         Campaign campaignToUpdate = campaignMapper.dtoToCampaign(campaignDto);
@@ -42,7 +42,7 @@ public class CampaignService {
     public CampaignDto getCampaign(Long id) throws CampaignNotExistsException {
         Optional<Campaign> campaign = campaignRepository.findById(id);
         if (campaign.isEmpty()) {
-            throw new CampaignNotExistsException();
+            throw new CampaignNotExistsException("Wrong id was provided during get operation, campaign does not exists");
         }
         return campaignMapper.campaignToDto(campaign.get());
     }
