@@ -6,11 +6,10 @@ import com.pWaw.gmhelper.DataManipulation.DTO.Note.CharacterNoteDto;
 import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.NoteNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Service.NoteService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,13 +18,13 @@ public class NoteControllerImpl implements NoteController {
     private final NoteService noteService;
 
     @Override
-    public ResponseEntity<List<CampaignNoteDto>> getNotesForCampaign(Long id) {
-        return ResponseEntity.ok().body(noteService.getAllNotesForCampaign(id));
+    public ResponseEntity<Page<CampaignNoteDto>> getNotesForCampaign(Long id, Integer page, Integer pageSize) {
+        return ResponseEntity.ok().body(noteService.getAllNotesForCampaign(id, page, pageSize));
     }
 
     @Override
-    public ResponseEntity<List<CharacterNoteDto>> getNotesForCharacter(Long id) {
-        return ResponseEntity.ok().body(noteService.getAllNotesForCharacter(id));
+    public ResponseEntity<Page<CharacterNoteDto>> getNotesForCharacter(Long id, Integer page, Integer pageSize) {
+        return ResponseEntity.ok().body(noteService.getAllNotesForCharacter(id, page, pageSize));
     }
 
     @Override

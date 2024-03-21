@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -69,5 +70,6 @@ public interface ImageController {
             @ApiResponse(responseCode = "200", description = "All images info retrieved successfully")
     })
     @GetMapping
-    ResponseEntity<List<ImageDetails>> getAllImagesInfo();
+    ResponseEntity<Page<ImageDetails>> getAllImagesInfo(@RequestParam(name = "page", defaultValue = "0") Integer page,
+                                                        @RequestParam(name = "pageSize", defaultValue = "9") Integer pageSize);
 }

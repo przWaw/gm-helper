@@ -7,10 +7,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequestMapping(NoteController.DataPath.ROOT)
 @Tag(name = "Note Controller", description = "Class for note data manipulation")
@@ -26,14 +25,16 @@ public interface NoteController {
             @ApiResponse(responseCode = "200", description = "Notes successfully retrieved"),
     })
     @GetMapping(value = "campaign-notes/{id}")
-    ResponseEntity<List<CampaignNoteDto>> getNotesForCampaign(@PathVariable Long id);
+    ResponseEntity<Page<CampaignNoteDto>> getNotesForCampaign(@PathVariable Long id, @RequestParam(name = "page", defaultValue = "0") Integer page,
+                                                              @RequestParam(name = "pageSize", defaultValue = "9") Integer pageSize);
 
     @Operation(summary = "Get notes from character", description = "Get notes associated with character specified by campaign id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Notes successfully retrieved"),
     })
     @GetMapping("character-notes/{id}")
-    ResponseEntity<List<CharacterNoteDto>> getNotesForCharacter(@PathVariable Long id);
+    ResponseEntity<Page<CharacterNoteDto>> getNotesForCharacter(@PathVariable Long id, @RequestParam(name = "page", defaultValue = "0") Integer page,
+                                                                @RequestParam(name = "pageSize", defaultValue = "9") Integer pageSize);
 
     @Operation(summary = "Create note for campaign", description = "Create note that is tied to campaign")
     @ApiResponses(value = {

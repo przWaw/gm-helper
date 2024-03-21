@@ -6,10 +6,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequestMapping(CampaignController.DataPath.ROOT)
 @Tag(name = "Campaign Controller", description = "Class for campaign data manipulation.")
@@ -48,7 +47,8 @@ public interface CampaignController {
             @ApiResponse(responseCode = "200", description = "List of all campaigns successfully retrieved"),
     })
     @GetMapping
-    ResponseEntity<List<CampaignDto>> getAllCampaigns();
+    ResponseEntity<Page<CampaignDto>> getAllCampaigns(@RequestParam(name = "page", defaultValue = "0") Integer page,
+                                                      @RequestParam(name = "pageSize", defaultValue = "9") Integer pageSize);
 
     @Operation(summary = "Delete campaign", description = "Delete campaign with specified id")
     @ApiResponses(value = {

@@ -7,6 +7,7 @@ import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.EmptyFileSen
 import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.ImageNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Service.ImageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -53,7 +54,7 @@ public class ImageControllerImpl implements ImageController {
     }
 
     @Override
-    public ResponseEntity<List<ImageDetails>> getAllImagesInfo() {
-        return ResponseEntity.ok().body(imageService.getAllImagesInfo());
+    public ResponseEntity<Page<ImageDetails>> getAllImagesInfo(Integer page, Integer pageSize) {
+        return ResponseEntity.ok().body(imageService.getAllImagesInfo(page, pageSize));
     }
 }

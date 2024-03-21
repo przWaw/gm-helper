@@ -7,9 +7,11 @@ import com.pWaw.gmhelper.DataManipulation.Model.Campaign;
 import com.pWaw.gmhelper.DataManipulation.Repository.CampaignRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -47,8 +49,9 @@ public class CampaignService {
         return campaignMapper.campaignToDto(campaign.get());
     }
 
-    public List<CampaignDto> getAllCampaigns() {
-        return campaignMapper.campaignToDto(campaignRepository.findAll());
+    public Page<CampaignDto> getAllCampaigns(Integer page, Integer pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return campaignRepository.findAll(pageable).map(campaignMapper::campaignToDto);
     }
 
 }

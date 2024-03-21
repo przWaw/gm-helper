@@ -12,6 +12,9 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -61,9 +64,9 @@ public class ImageService {
         imageRepository.deleteById(id);
     }
 
-    public List<ImageDetails> getAllImagesInfo() {
-        List<Image> images = imageRepository.findAll();
-        return imageMapper.imageToDetails(images);
+    public Page<ImageDetails> getAllImagesInfo(Integer page, Integer pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return imageRepository.findAll(pageable).map(imageMapper::imageToDetails);
     }
 
     public List<ImageDetails> preloadCache(List<Long> ids) {

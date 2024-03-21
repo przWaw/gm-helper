@@ -5,6 +5,7 @@ import com.pWaw.gmhelper.DataManipulation.DTO.Character.CharacterDto;
 import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.CharacterNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Service.CharacterService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,8 +29,8 @@ public class CharacterControllerImpl implements CharacterController {
     }
 
     @Override
-    public ResponseEntity<List<CharacterDto>> getAllCharacters() {
-        return ResponseEntity.ok().body(characterService.getAllCharacters());
+    public ResponseEntity<Page<CharacterDto>> getAllCharacters(Integer page, Integer pageSize) {
+        return ResponseEntity.ok().body(characterService.getAllCharacters(page, pageSize));
     }
 
     @Override

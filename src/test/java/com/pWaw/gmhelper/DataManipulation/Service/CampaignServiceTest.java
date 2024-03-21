@@ -11,8 +11,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -70,15 +72,14 @@ class CampaignServiceTest {
 
     @Test
     public void getAllCampaigns_shouldReturnListOfCampaignsDto() {
-        when(campaignRepository.findAll()).thenReturn(List.of(new Campaign(), new Campaign()));
-        when(campaignMapper.campaignToDto(anyList())).thenReturn(List.of(new CampaignDto(), new CampaignDto()));
+        Pageable pageable = PageRequest.of(1, 2);
+        when(campaignRepository.findAll(any(Pageable.class))).thenReturn(Page.empty(pageable));
 
-        List<CampaignDto> result = campaignService.getAllCampaigns();
+        Page<CampaignDto> result = campaignService.getAllCampaigns(1, 2);
 
         assertAll(() -> {
-            assertEquals(2, result.size());
-            verify(campaignRepository, times(1)).findAll();
-            verify(campaignMapper, times(1)).campaignToDto(anyList());
+            assertEquals(0, result.getTotalElements());
+            verify(campaignRepository, times(1)).findAll(any(Pageable.class));
         });
     }
 

@@ -10,9 +10,10 @@ import com.pWaw.gmhelper.DataManipulation.Repository.NoteImpl.CampaignNoteReposi
 import com.pWaw.gmhelper.DataManipulation.Repository.NoteImpl.CharacterNoteRepository;
 import com.pWaw.gmhelper.DataManipulation.Repository.NoteRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -23,14 +24,14 @@ public class NoteService {
     private final CharacterNoteRepository characterNoteRepository;
     private final NoteMapper noteMapper;
 
-    public List<CampaignNoteDto> getAllNotesForCampaign(Long campaignId) {
-        List<CampaignNote> campaignNotes = campaignNoteRepository.findAllByCampaign_Id(campaignId);
-        return noteMapper.campaignNoteToDto(campaignNotes);
+    public Page<CampaignNoteDto> getAllNotesForCampaign(Long campaignId, Integer page, Integer pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return campaignNoteRepository.findAllByCampaign_Id(campaignId, pageable).map(noteMapper::campaignNoteToDto);
     }
 
-    public List<CharacterNoteDto> getAllNotesForCharacter(Long characterId) {
-        List<CharacterNote> characterNotes = characterNoteRepository.findAllByCharacter_Id(characterId);
-        return noteMapper.characterNoteToDto(characterNotes);
+    public Page<CharacterNoteDto> getAllNotesForCharacter(Long characterId, Integer page, Integer pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return characterNoteRepository.findAllByCharacter_Id(characterId, pageable).map(noteMapper::characterNoteToDto);
     }
 
     public CampaignNoteDto createCampaignNote(CampaignNoteDto noteDto) {

@@ -6,6 +6,9 @@ import com.pWaw.gmhelper.DataManipulation.Mappers.CharacterMapper;
 import com.pWaw.gmhelper.DataManipulation.Model.Character;
 import com.pWaw.gmhelper.DataManipulation.Repository.CharacterRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,9 +34,10 @@ public class CharacterService {
         return characterMapper.characterToDto(characters);
     }
 
-    public List<CharacterDto> getAllCharacters() {
-        List<Character> characters = characterRepository.findAll();
-        return characterMapper.characterToDto(characters);
+    public Page<CharacterDto> getAllCharacters(Integer page, Integer pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return characterRepository.findAll(pageable).map(characterMapper::characterToDto);
+
     }
 
     public CharacterDto createCharacter(CharacterDto characterDto) {
