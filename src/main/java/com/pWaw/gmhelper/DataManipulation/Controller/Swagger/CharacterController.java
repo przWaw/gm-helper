@@ -10,8 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RequestMapping(CharacterController.DataPath.ROOT)
 @Tag(name = "Character Controller", description = "Class for character data manipulation.")
 public interface CharacterController {
@@ -34,7 +32,8 @@ public interface CharacterController {
             @ApiResponse(responseCode = "200", description = "Characters successfully retrieved"),
     })
     @GetMapping("campaign/{id}")
-    ResponseEntity<List<CharacterDto>> getAllCharactersFromCampaign(Long campaignId);
+    ResponseEntity<Page<CharacterDto>> getAllCharactersFromCampaign(Long campaignId, @RequestParam(name = "page", defaultValue = "0") Integer page,
+                                                                    @RequestParam(name = "pageSize", defaultValue = "9") Integer pageSize);
 
     @Operation(summary = "Get all characters", description = "Get list of all present characters in database")
     @ApiResponses(value = {

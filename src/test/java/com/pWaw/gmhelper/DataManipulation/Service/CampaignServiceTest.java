@@ -71,7 +71,7 @@ class CampaignServiceTest {
     }
 
     @Test
-    public void getAllCampaigns_shouldReturnListOfCampaignsDto() {
+    public void getAllCampaigns_shouldReturnPageOfCampaignsDto() {
         Pageable pageable = PageRequest.of(1, 2);
         when(campaignRepository.findAll(any(Pageable.class))).thenReturn(Page.empty(pageable));
 

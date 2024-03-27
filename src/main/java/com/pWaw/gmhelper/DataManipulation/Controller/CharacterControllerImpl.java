@@ -10,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 public class CharacterControllerImpl implements CharacterController {
@@ -24,8 +22,8 @@ public class CharacterControllerImpl implements CharacterController {
     }
 
     @Override
-    public ResponseEntity<List<CharacterDto>> getAllCharactersFromCampaign(Long campaignId) {
-        return ResponseEntity.ok().body(characterService.getAllCharactersFromCampaign(campaignId));
+    public ResponseEntity<Page<CharacterDto>> getAllCharactersFromCampaign(Long campaignId, Integer page, Integer pageSize) {
+        return ResponseEntity.ok().body(characterService.getAllCharactersFromCampaign(campaignId, page, pageSize));
     }
 
     @Override

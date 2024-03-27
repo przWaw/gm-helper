@@ -11,7 +11,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,9 +28,9 @@ public class CharacterService {
         return characterMapper.characterToDto(character.get());
     }
 
-    public List<CharacterDto> getAllCharactersFromCampaign(Long campaignId) {
-        List<Character> characters = characterRepository.findAllByCampaign_Id(campaignId);
-        return characterMapper.characterToDto(characters);
+    public Page<CharacterDto> getAllCharactersFromCampaign(Long campaignId, Integer page, Integer pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return characterRepository.findAllByCampaign_Id(campaignId, pageable).map(characterMapper::characterToDto);
     }
 
     public Page<CharacterDto> getAllCharacters(Integer page, Integer pageSize) {

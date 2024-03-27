@@ -32,9 +32,7 @@ public class ImageService {
 
     public ImageDetails uploadImage(MultipartFile image) throws EmptyFileSendException {
         ImageDto dto = ImageDto.readFromMultipart(image);
-        System.out.println(dto.getFileType());
         Image imageToSave = imageMapper.dtoToImage(dto);
-        System.out.println(imageToSave.getFileType());
         return imageMapper.imageToDetails(imageRepository.save(imageToSave));
     }
 

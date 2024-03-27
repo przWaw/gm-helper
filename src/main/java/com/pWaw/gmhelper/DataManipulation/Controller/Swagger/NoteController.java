@@ -17,14 +17,14 @@ public interface NoteController {
 
     class DataPath{
         private DataPath() {}
-        public static final String ROOT = "api/gm-helper/data/notes/";
+        public static final String ROOT = "api/gm-helper/data";
     }
 
     @Operation(summary = "Get notes from campaign/character", description = "Get notes associated with campaign/character specified by campaign id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Notes successfully retrieved"),
     })
-    @GetMapping(value = "campaign-notes/{id}")
+    @GetMapping(value = "campaign/{id}/notes")
     ResponseEntity<Page<CampaignNoteDto>> getNotesForCampaign(@PathVariable Long id, @RequestParam(name = "page", defaultValue = "0") Integer page,
                                                               @RequestParam(name = "pageSize", defaultValue = "9") Integer pageSize);
 
@@ -32,7 +32,7 @@ public interface NoteController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Notes successfully retrieved"),
     })
-    @GetMapping("character-notes/{id}")
+    @GetMapping("character/{id}/notes")
     ResponseEntity<Page<CharacterNoteDto>> getNotesForCharacter(@PathVariable Long id, @RequestParam(name = "page", defaultValue = "0") Integer page,
                                                                 @RequestParam(name = "pageSize", defaultValue = "9") Integer pageSize);
 
@@ -40,14 +40,14 @@ public interface NoteController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Note successfully created")
     })
-    @PostMapping("campaign-notes")
+    @PostMapping("notes/campaign-notes")
     ResponseEntity<CampaignNoteDto> createCampaignNote(@RequestBody CampaignNoteDto noteDto);
 
     @Operation(summary = "Create note for character", description = "Create note that is tied to character")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Note successfully created")
     })
-    @PostMapping("character-notes")
+    @PostMapping("notes/character-notes")
     ResponseEntity<CharacterNoteDto> createCharacterNote(@RequestBody CharacterNoteDto noteDto);
 
     @Operation(summary = "Update note tied to campaign", description = "Put with body containing updated form of note")
@@ -55,7 +55,7 @@ public interface NoteController {
             @ApiResponse(responseCode = "200", description = "Note successfully updated"),
             @ApiResponse(responseCode = "404", description = "Note with given id was not found in database")
     })
-    @PutMapping("campaign-notes")
+    @PutMapping("notes/campaign-notes")
     ResponseEntity<CampaignNoteDto> updateCampaignNote(@RequestBody CampaignNoteDto noteDto) throws NoteNotExistsException;
 
     @Operation(summary = "Update note tied to character", description = "Put with body containing updated form of note")
@@ -63,13 +63,13 @@ public interface NoteController {
             @ApiResponse(responseCode = "200", description = "Note successfully updated"),
             @ApiResponse(responseCode = "404", description = "Note with given id was not found in database")
     })
-    @PutMapping("character-notes")
+    @PutMapping("notes/character-notes")
     ResponseEntity<CharacterNoteDto> updateCharacterNote(@RequestBody CharacterNoteDto noteDto) throws NoteNotExistsException;
 
     @Operation(summary = "Delete note", description = "Delete note with given id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Note deleted successfully")
     })
-    @DeleteMapping("{id}")
+    @DeleteMapping("notes/{id}")
     ResponseEntity<Void> deleteNote(@PathVariable Long id);
 }
