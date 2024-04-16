@@ -20,7 +20,7 @@ public interface NoteController {
         public static final String ROOT = "api/gm-helper/data/";
     }
 
-    @Operation(summary = "Get notes from campaign/character", description = "Get notes associated with campaign/character specified by campaign id")
+    @Operation(summary = "Get notes from campaign", description = "Get notes associated with campaign specified by campaign id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Notes successfully retrieved"),
     })
@@ -73,9 +73,17 @@ public interface NoteController {
     @DeleteMapping("notes/{id}")
     ResponseEntity<Void> deleteNote(@PathVariable Long id);
 
+    @Operation(summary = "Get note from character", description = "Get note associated with character specified by note id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Notes successfully retrieved"),
+    })
     @GetMapping("character-notes/{id}")
     ResponseEntity<CharacterNoteDto> getNoteForCharacter(@PathVariable Long id) throws NoteNotExistsException;
 
+    @Operation(summary = "Get note from campaign", description = "Get note associated with campaign specified by note id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Notes successfully retrieved"),
+    })
     @GetMapping("campaign-notes/{id}")
     ResponseEntity<CampaignNoteDto> getNoteForCampaign(@PathVariable Long id) throws NoteNotExistsException;
 }

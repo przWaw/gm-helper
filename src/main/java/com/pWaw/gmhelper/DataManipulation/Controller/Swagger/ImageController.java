@@ -47,7 +47,7 @@ public interface ImageController {
             @ApiResponse(responseCode = "200", description = "Image successfully retrieved"),
             @ApiResponse(responseCode = "404", description = "Image with given id was not found in database")
     })
-    @GetMapping("{id}")
+    @GetMapping("{id}/raw")
     ResponseEntity<byte[]> getImage(@PathVariable Long id) throws ImageNotExistsException;
 
     @Operation(summary = "Delete image", description = "Delete image with specified id")

@@ -41,6 +41,7 @@ public class CharacterService {
 
     public CharacterDto createCharacter(CharacterDto characterDto) {
         Character character = characterMapper.dtoToCharacter(characterDto);
+
         return characterMapper.characterToDto(characterRepository.save(character));
     }
 

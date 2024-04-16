@@ -32,7 +32,7 @@ public class ImageControllerImpl implements ImageController {
        ImageDetails details = imageService.uploadImage(image);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
-                .path(CharacterController.DataPath.ROOT + "/{id}")
+                .path(DataPath.ROOT + "/{id}/raw")
                 .buildAndExpand(details.getId())
                 .toUri();
         return ResponseEntity.created(location).body(details);
