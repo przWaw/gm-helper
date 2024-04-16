@@ -15,6 +15,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class NoteService {
@@ -23,6 +25,22 @@ public class NoteService {
     private final CampaignNoteRepository campaignNoteRepository;
     private final CharacterNoteRepository characterNoteRepository;
     private final NoteMapper noteMapper;
+
+    public CampaignNoteDto getCampaignNoteDto(Long id) throws NoteNotExistsException {
+        Optional<CampaignNote> note = campaignNoteRepository.findById(id);
+        if (note.isEmpty()) {
+            throw new NoteNotExistsException();
+        }
+        return noteMapper.campaignNoteToDto(note.get());
+    }
+
+    public CharacterNoteDto getCharacterNoteDto(Long id) throws NoteNotExistsException {
+        Optional<CharacterNote> note = characterNoteRepository.findById(id);
+        if (note.isEmpty()) {
+            throw new NoteNotExistsException();
+        }
+        return noteMapper.characterNoteToDto(note.get());
+    }
 
     public Page<CampaignNoteDto> getAllNotesForCampaign(Long campaignId, Integer page, Integer pageSize) {
         Pageable pageable = PageRequest.of(page, pageSize);

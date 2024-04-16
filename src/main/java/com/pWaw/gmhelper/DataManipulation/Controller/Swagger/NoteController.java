@@ -72,4 +72,10 @@ public interface NoteController {
     })
     @DeleteMapping("notes/{id}")
     ResponseEntity<Void> deleteNote(@PathVariable Long id);
+
+    @GetMapping("character-notes/{id}")
+    ResponseEntity<CharacterNoteDto> getNoteForCharacter(@PathVariable Long id) throws NoteNotExistsException;
+
+    @GetMapping("campaign-notes/{id}")
+    ResponseEntity<CampaignNoteDto> getNoteForCampaign(@PathVariable Long id) throws NoteNotExistsException;
 }

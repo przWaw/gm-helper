@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.annotation.Repeatable;
+
 @RestController
 @RequiredArgsConstructor
 public class NoteControllerImpl implements NoteController {
@@ -51,5 +53,15 @@ public class NoteControllerImpl implements NoteController {
     public ResponseEntity<Void> deleteNote(Long id) {
         noteService.deleteNote(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<CharacterNoteDto> getNoteForCharacter(Long id) throws NoteNotExistsException {
+        return ResponseEntity.ok().body(noteService.getCharacterNoteDto(id));
+    }
+
+    @Override
+    public ResponseEntity<CampaignNoteDto> getNoteForCampaign(Long id) throws NoteNotExistsException {
+        return ResponseEntity.ok().body(noteService.getCampaignNoteDto(id));
     }
 }
