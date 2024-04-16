@@ -58,7 +58,7 @@ public interface NoteController {
             @ApiResponse(responseCode = "404", description = "Note with given id was not found in database")
     })
     @PutMapping("campaign-notes")
-    ResponseEntity<CampaignNoteDto> updateCampaignNote(@RequestBody CampaignNoteDto noteDto) throws NoteNotExistsException;
+    ResponseEntity<CampaignNoteDto> updateCampaignNote(@RequestBody CampaignNoteDto noteDto) throws NoteNotExistsException, CampaignNotExistsException;
 
     @Operation(summary = "Update note tied to character", description = "Put with body containing updated form of note")
     @ApiResponses(value = {
@@ -66,7 +66,7 @@ public interface NoteController {
             @ApiResponse(responseCode = "404", description = "Note with given id was not found in database")
     })
     @PutMapping("character-notes")
-    ResponseEntity<CharacterNoteDto> updateCharacterNote(@RequestBody CharacterNoteDto noteDto) throws NoteNotExistsException;
+    ResponseEntity<CharacterNoteDto> updateCharacterNote(@RequestBody CharacterNoteDto noteDto) throws NoteNotExistsException, CharacterNotExistsException;
 
     @Operation(summary = "Delete note", description = "Delete note with given id")
     @ApiResponses(value = {

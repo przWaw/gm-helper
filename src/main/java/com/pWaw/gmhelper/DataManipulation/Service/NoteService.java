@@ -74,17 +74,23 @@ public class NoteService {
         return noteMapper.characterNoteToDto(characterNoteRepository.save(noteToSave));
     }
 
-    public CampaignNoteDto updateCampaignNote(CampaignNoteDto noteDto) throws NoteNotExistsException {
+    public CampaignNoteDto updateCampaignNote(CampaignNoteDto noteDto) throws NoteNotExistsException, CampaignNotExistsException {
         if (!noteRepository.existsById(noteDto.getId())) {
             throw new NoteNotExistsException("Wrong id was provided during update operation, note does not exists");
+        }
+        if (!campaignRepository.existsById(noteDto.getCampaignId())) {
+            throw new CampaignNotExistsException("Campaign that you are trying attach note to does not exists");
         }
         CampaignNote campaignNote = noteMapper.dtoToCampaignNote(noteDto);
         return noteMapper.campaignNoteToDto(campaignNoteRepository.save(campaignNote));
     }
 
-    public CharacterNoteDto updateCharacterNote(CharacterNoteDto noteDto) throws NoteNotExistsException {
+    public CharacterNoteDto updateCharacterNote(CharacterNoteDto noteDto) throws NoteNotExistsException, CharacterNotExistsException {
         if (!noteRepository.existsById(noteDto.getId())) {
             throw new NoteNotExistsException("Wrong id was provided during update operation, note does not exists");
+        }
+        if (!characterRepository.existsById(noteDto.getCharacterId())) {
+            throw new CharacterNotExistsException("Character that you are trying attach note to does not exists");
         }
         CharacterNote characterNote = noteMapper.dtoToCharacterNote(noteDto);
         return noteMapper.characterNoteToDto(characterNoteRepository.save(characterNote));

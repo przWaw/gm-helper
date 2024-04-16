@@ -54,12 +54,12 @@ public class NoteControllerImpl implements NoteController {
     }
 
     @Override
-    public ResponseEntity<CampaignNoteDto> updateCampaignNote(CampaignNoteDto noteDto) throws NoteNotExistsException {
+    public ResponseEntity<CampaignNoteDto> updateCampaignNote(CampaignNoteDto noteDto) throws NoteNotExistsException, CampaignNotExistsException {
         return ResponseEntity.ok().body(noteService.updateCampaignNote(noteDto));
     }
 
     @Override
-    public ResponseEntity<CharacterNoteDto> updateCharacterNote(CharacterNoteDto noteDto) throws NoteNotExistsException {
+    public ResponseEntity<CharacterNoteDto> updateCharacterNote(CharacterNoteDto noteDto) throws NoteNotExistsException, CharacterNotExistsException {
         return ResponseEntity.ok().body(noteService.updateCharacterNote(noteDto));
     }
 
