@@ -4,7 +4,9 @@ import com.pWaw.gmhelper.DataManipulation.DTO.Character.CharacterDto;
 import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.CharacterNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Mappers.CharacterMapper;
 import com.pWaw.gmhelper.DataManipulation.Model.Character;
+import com.pWaw.gmhelper.DataManipulation.Repository.CampaignRepository;
 import com.pWaw.gmhelper.DataManipulation.Repository.CharacterRepository;
+import com.pWaw.gmhelper.DataManipulation.Repository.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +20,8 @@ import java.util.Optional;
 public class CharacterService {
 
     private final CharacterRepository characterRepository;
+    private final ImageRepository imageRepository;
+    private final CampaignRepository campaignRepository;
     private final CharacterMapper characterMapper;
 
     public CharacterDto getCharacterById(Long id) throws CharacterNotExistsException {
@@ -41,7 +45,12 @@ public class CharacterService {
 
     public CharacterDto createCharacter(CharacterDto characterDto) {
         Character character = characterMapper.dtoToCharacter(characterDto);
-
+        if (!campaignRepository.existsById(character.getCampaign().getId())) {
+            character.setCampaign(null);
+        }
+        if (!imageRepository.existsById(character.getCharacterPortrait().getId())) {
+            character.setCharacterPortrait(null);
+        }
         return characterMapper.characterToDto(characterRepository.save(character));
     }
 
