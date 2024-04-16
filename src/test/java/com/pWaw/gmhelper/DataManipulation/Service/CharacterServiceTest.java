@@ -3,8 +3,12 @@ package com.pWaw.gmhelper.DataManipulation.Service;
 import com.pWaw.gmhelper.DataManipulation.DTO.Character.CharacterDto;
 import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.CharacterNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Mappers.CharacterMapper;
+import com.pWaw.gmhelper.DataManipulation.Model.Campaign;
 import com.pWaw.gmhelper.DataManipulation.Model.Character;
+import com.pWaw.gmhelper.DataManipulation.Model.Image;
+import com.pWaw.gmhelper.DataManipulation.Repository.CampaignRepository;
 import com.pWaw.gmhelper.DataManipulation.Repository.CharacterRepository;
+import com.pWaw.gmhelper.DataManipulation.Repository.ImageRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,6 +31,12 @@ class CharacterServiceTest {
     @Mock
     private static CharacterMapper characterMapper;
 
+    @Mock
+    private static CampaignRepository campaignRepository;
+
+    @Mock
+    private static ImageRepository imageRepository;
+
     private static CharacterService characterService;
 
     private AutoCloseable openMocks;
@@ -34,7 +44,7 @@ class CharacterServiceTest {
     @BeforeEach
     public void init() {
         openMocks = MockitoAnnotations.openMocks(this);
-        characterService = new CharacterService(characterRepository, characterMapper);
+        characterService = new CharacterService(characterRepository, imageRepository, campaignRepository, characterMapper);
     }
 
     @AfterEach
@@ -101,9 +111,14 @@ class CharacterServiceTest {
     @Test
     public void createCharacter_shouldReturnCharacterDto() {
         CharacterDto input = new CharacterDto();
+        Character mockCharacter = new Character();
+        mockCharacter.setCampaign(new Campaign());
+        mockCharacter.getCampaign().setId(1L);
+        mockCharacter.setCharacterPortrait(new Image());
+        mockCharacter.getCharacterPortrait().setId(1L);
 
         when(characterMapper.characterToDto(any(Character.class))).thenReturn(new CharacterDto());
-        when(characterMapper.dtoToCharacter(any(CharacterDto.class))).thenReturn(new Character());
+        when(characterMapper.dtoToCharacter(any(CharacterDto.class))).thenReturn(mockCharacter);
         when(characterRepository.save(any())).thenReturn(new Character());
 
         CharacterDto result = characterService.createCharacter(input);
@@ -113,6 +128,8 @@ class CharacterServiceTest {
             verify(characterMapper, times(1)).characterToDto(any(Character.class));
             verify(characterMapper,times(1)).dtoToCharacter(any(CharacterDto.class));
             verify(characterRepository, times(1)).save(any());
+            verify(campaignRepository, times(1)).existsById(any());
+            verify(imageRepository, times(1)).existsById(any());
         });
     }
 
