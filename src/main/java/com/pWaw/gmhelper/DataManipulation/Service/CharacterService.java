@@ -59,8 +59,13 @@ public class CharacterService {
         if(character.isEmpty()) {
             throw new CharacterNotExistsException("Wrong id was provided during update operation, character does not exists");
         }
-
         Character characterToUpdate = characterMapper.dtoToCharacter(characterDto);
+        if (!imageRepository.existsById(characterDto.getPortraitId())) {
+            characterToUpdate.setCharacterPortrait(null);
+        }
+        if (!campaignRepository.existsById(characterDto.getCampaignId())) {
+            characterToUpdate.setCampaign(null);
+        }
         return characterMapper.characterToDto(characterRepository.save(characterToUpdate));
     }
 
