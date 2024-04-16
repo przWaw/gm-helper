@@ -1,6 +1,8 @@
 package com.pWaw.gmhelper.DataManipulation.Controller;
 
+import com.pWaw.gmhelper.DataManipulation.Controller.Swagger.CharacterController;
 import com.pWaw.gmhelper.DataManipulation.Controller.Swagger.ImageController;
+import com.pWaw.gmhelper.DataManipulation.DTO.Character.CharacterDto;
 import com.pWaw.gmhelper.DataManipulation.DTO.Image.ImageDetails;
 import com.pWaw.gmhelper.DataManipulation.DTO.Image.ImageDto;
 import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.EmptyFileSendException;
@@ -14,7 +16,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -25,7 +29,13 @@ public class ImageControllerImpl implements ImageController {
 
     @Override
     public ResponseEntity<ImageDetails> uploadImage(MultipartFile image) throws EmptyFileSendException {
-        return new ResponseEntity<>(imageService.uploadImage(image), HttpStatus.CREATED);
+       ImageDetails details = imageService.uploadImage(image);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path(CharacterController.DataPath.ROOT + "/{id}")
+                .buildAndExpand(details.getId())
+                .toUri();
+        return ResponseEntity.created(location).body(details);
     }
 
     @Override
