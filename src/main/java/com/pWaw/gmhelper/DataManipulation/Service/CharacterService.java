@@ -45,10 +45,10 @@ public class CharacterService {
 
     public CharacterDto createCharacter(CharacterDto characterDto) {
         Character character = characterMapper.dtoToCharacter(characterDto);
-        if (!campaignRepository.existsById(character.getCampaign().getId())) {
+        if (!campaignRepository.existsById(characterDto.getCampaignId())) {
             character.setCampaign(null);
         }
-        if (!imageRepository.existsById(character.getCharacterPortrait().getId())) {
+        if (!imageRepository.existsById(characterDto.getPortraitId())) {
             character.setCharacterPortrait(null);
         }
         return characterMapper.characterToDto(characterRepository.save(character));

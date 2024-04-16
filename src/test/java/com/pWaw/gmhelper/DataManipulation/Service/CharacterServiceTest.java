@@ -111,14 +111,9 @@ class CharacterServiceTest {
     @Test
     public void createCharacter_shouldReturnCharacterDto() {
         CharacterDto input = new CharacterDto();
-        Character mockCharacter = new Character();
-        mockCharacter.setCampaign(new Campaign());
-        mockCharacter.getCampaign().setId(1L);
-        mockCharacter.setCharacterPortrait(new Image());
-        mockCharacter.getCharacterPortrait().setId(1L);
 
         when(characterMapper.characterToDto(any(Character.class))).thenReturn(new CharacterDto());
-        when(characterMapper.dtoToCharacter(any(CharacterDto.class))).thenReturn(mockCharacter);
+        when(characterMapper.dtoToCharacter(any(CharacterDto.class))).thenReturn(new Character());
         when(characterRepository.save(any())).thenReturn(new Character());
 
         CharacterDto result = characterService.createCharacter(input);
