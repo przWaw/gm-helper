@@ -17,7 +17,7 @@ public interface NoteController {
 
     class DataPath{
         private DataPath() {}
-        public static final String ROOT = "api/gm-helper/data";
+        public static final String ROOT = "api/gm-helper/data/";
     }
 
     @Operation(summary = "Get notes from campaign/character", description = "Get notes associated with campaign/character specified by campaign id")
@@ -40,14 +40,14 @@ public interface NoteController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Note successfully created")
     })
-    @PostMapping("notes/campaign-notes")
+    @PostMapping("campaign-notes")
     ResponseEntity<CampaignNoteDto> createCampaignNote(@RequestBody CampaignNoteDto noteDto);
 
     @Operation(summary = "Create note for character", description = "Create note that is tied to character")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Note successfully created")
     })
-    @PostMapping("notes/character-notes")
+    @PostMapping("character-notes")
     ResponseEntity<CharacterNoteDto> createCharacterNote(@RequestBody CharacterNoteDto noteDto);
 
     @Operation(summary = "Update note tied to campaign", description = "Put with body containing updated form of note")
@@ -55,7 +55,7 @@ public interface NoteController {
             @ApiResponse(responseCode = "200", description = "Note successfully updated"),
             @ApiResponse(responseCode = "404", description = "Note with given id was not found in database")
     })
-    @PutMapping("notes/campaign-notes")
+    @PutMapping("campaign-notes")
     ResponseEntity<CampaignNoteDto> updateCampaignNote(@RequestBody CampaignNoteDto noteDto) throws NoteNotExistsException;
 
     @Operation(summary = "Update note tied to character", description = "Put with body containing updated form of note")
@@ -63,7 +63,7 @@ public interface NoteController {
             @ApiResponse(responseCode = "200", description = "Note successfully updated"),
             @ApiResponse(responseCode = "404", description = "Note with given id was not found in database")
     })
-    @PutMapping("notes/character-notes")
+    @PutMapping("character-notes")
     ResponseEntity<CharacterNoteDto> updateCharacterNote(@RequestBody CharacterNoteDto noteDto) throws NoteNotExistsException;
 
     @Operation(summary = "Delete note", description = "Delete note with given id")

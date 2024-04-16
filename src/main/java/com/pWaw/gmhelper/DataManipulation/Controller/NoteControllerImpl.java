@@ -7,9 +7,11 @@ import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.NoteNotExist
 import com.pWaw.gmhelper.DataManipulation.Service.NoteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,12 +31,24 @@ public class NoteControllerImpl implements NoteController {
 
     @Override
     public ResponseEntity<CampaignNoteDto> createCampaignNote(CampaignNoteDto noteDto) {
-        return new ResponseEntity<>(noteService.createCampaignNote(noteDto), HttpStatus.CREATED);
+        CampaignNoteDto dto = noteService.createCampaignNote(noteDto);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path(DataPath.ROOT + "/campaign-notes/{id}")
+                .buildAndExpand(dto.getId())
+                .toUri();
+        return ResponseEntity.created(location).body(dto);
     }
 
     @Override
     public ResponseEntity<CharacterNoteDto> createCharacterNote(CharacterNoteDto noteDto) {
-        return new ResponseEntity<>(noteService.createCharacterNote(noteDto), HttpStatus.CREATED);
+        CharacterNoteDto dto = noteService.createCharacterNote(noteDto);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path(DataPath.ROOT + "/character-notes/{id}")
+                .buildAndExpand(dto.getId())
+                .toUri();
+        return ResponseEntity.created(location).body(dto);
     }
 
     @Override
