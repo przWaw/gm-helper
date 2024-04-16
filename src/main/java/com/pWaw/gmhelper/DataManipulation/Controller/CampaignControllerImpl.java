@@ -6,9 +6,11 @@ import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.CampaignNotE
 import com.pWaw.gmhelper.DataManipulation.Service.CampaignService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,7 +19,13 @@ public class CampaignControllerImpl implements CampaignController {
     private final CampaignService campaignService;
     @Override
     public ResponseEntity<CampaignDto> createCampaign(CampaignDto campaignDto) {
-        return new ResponseEntity<>(campaignService.createCampaign(campaignDto), HttpStatus.CREATED);
+        CampaignDto dto = campaignService.createCampaign(campaignDto);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path(DataPath.ROOT + "/{id}")
+                .buildAndExpand(dto.getId())
+                .toUri();
+        return ResponseEntity.created(location).body(dto);
     }
 
     @Override
