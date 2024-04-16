@@ -1,6 +1,9 @@
 package com.pWaw.gmhelper.DataManipulation.Service;
 
 import com.pWaw.gmhelper.DataManipulation.Mappers.NoteMapper;
+import com.pWaw.gmhelper.DataManipulation.Model.NoteImpl.CharacterNote;
+import com.pWaw.gmhelper.DataManipulation.Repository.CampaignRepository;
+import com.pWaw.gmhelper.DataManipulation.Repository.CharacterRepository;
 import com.pWaw.gmhelper.DataManipulation.Repository.NoteImpl.CampaignNoteRepository;
 import com.pWaw.gmhelper.DataManipulation.Repository.NoteImpl.CharacterNoteRepository;
 import com.pWaw.gmhelper.DataManipulation.Repository.NoteRepository;
@@ -26,13 +29,18 @@ class NoteServiceTest {
     @Mock
     private static NoteMapper noteMapper;
 
+    @Mock
+    private static CampaignRepository campaignRepository;
+
+    @Mock static CharacterRepository characterRepository;
+
     private static NoteService noteService;
     private AutoCloseable openMocks;
 
     @BeforeEach
     public void init() {
         openMocks = MockitoAnnotations.openMocks(this);
-        noteService = new NoteService(noteRepository, campaignNoteRepository, characterNoteRepository, noteMapper);
+        noteService = new NoteService(noteRepository, campaignNoteRepository, characterNoteRepository, noteMapper, campaignRepository, characterRepository);
     }
 
     @AfterEach

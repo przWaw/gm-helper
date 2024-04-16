@@ -2,6 +2,8 @@ package com.pWaw.gmhelper.DataManipulation.Controller.Swagger;
 
 import com.pWaw.gmhelper.DataManipulation.DTO.Note.CampaignNoteDto;
 import com.pWaw.gmhelper.DataManipulation.DTO.Note.CharacterNoteDto;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.CampaignNotExistsException;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.CharacterNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.NoteNotExistsException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -41,14 +43,14 @@ public interface NoteController {
             @ApiResponse(responseCode = "201", description = "Note successfully created")
     })
     @PostMapping("campaign-notes")
-    ResponseEntity<CampaignNoteDto> createCampaignNote(@RequestBody CampaignNoteDto noteDto);
+    ResponseEntity<CampaignNoteDto> createCampaignNote(@RequestBody CampaignNoteDto noteDto) throws CampaignNotExistsException;
 
     @Operation(summary = "Create note for character", description = "Create note that is tied to character")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Note successfully created")
     })
     @PostMapping("character-notes")
-    ResponseEntity<CharacterNoteDto> createCharacterNote(@RequestBody CharacterNoteDto noteDto);
+    ResponseEntity<CharacterNoteDto> createCharacterNote(@RequestBody CharacterNoteDto noteDto) throws CharacterNotExistsException;
 
     @Operation(summary = "Update note tied to campaign", description = "Put with body containing updated form of note")
     @ApiResponses(value = {

@@ -2,10 +2,14 @@ package com.pWaw.gmhelper.DataManipulation.Service;
 
 import com.pWaw.gmhelper.DataManipulation.DTO.Note.CampaignNoteDto;
 import com.pWaw.gmhelper.DataManipulation.DTO.Note.CharacterNoteDto;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.CampaignNotExistsException;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.CharacterNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.NoteNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Mappers.NoteMapper;
 import com.pWaw.gmhelper.DataManipulation.Model.NoteImpl.CampaignNote;
 import com.pWaw.gmhelper.DataManipulation.Model.NoteImpl.CharacterNote;
+import com.pWaw.gmhelper.DataManipulation.Repository.CampaignRepository;
+import com.pWaw.gmhelper.DataManipulation.Repository.CharacterRepository;
 import com.pWaw.gmhelper.DataManipulation.Repository.NoteImpl.CampaignNoteRepository;
 import com.pWaw.gmhelper.DataManipulation.Repository.NoteImpl.CharacterNoteRepository;
 import com.pWaw.gmhelper.DataManipulation.Repository.NoteRepository;
@@ -25,6 +29,8 @@ public class NoteService {
     private final CampaignNoteRepository campaignNoteRepository;
     private final CharacterNoteRepository characterNoteRepository;
     private final NoteMapper noteMapper;
+    private final CampaignRepository campaignRepository;
+    private final CharacterRepository characterRepository;
 
     public CampaignNoteDto getCampaignNoteDto(Long id) throws NoteNotExistsException {
         Optional<CampaignNote> note = campaignNoteRepository.findById(id);
@@ -52,13 +58,19 @@ public class NoteService {
         return characterNoteRepository.findAllByCharacter_Id(characterId, pageable).map(noteMapper::characterNoteToDto);
     }
 
-    public CampaignNoteDto createCampaignNote(CampaignNoteDto noteDto) {
+    public CampaignNoteDto createCampaignNote(CampaignNoteDto noteDto) throws CampaignNotExistsException {
         CampaignNote noteToSave = noteMapper.dtoToCampaignNote(noteDto);
+        if (!campaignRepository.existsById(noteDto.getCampaignId())) {
+            throw new CampaignNotExistsException("Campaign that you are trying attach note to does not exists");
+        }
         return noteMapper.campaignNoteToDto(campaignNoteRepository.save(noteToSave));
     }
 
-    public CharacterNoteDto createCharacterNote(CharacterNoteDto noteDto) {
+    public CharacterNoteDto createCharacterNote(CharacterNoteDto noteDto) throws CharacterNotExistsException {
         CharacterNote noteToSave = noteMapper.dtoToCharacterNote(noteDto);
+        if (!characterRepository.existsById(noteDto.getCharacterId())) {
+            throw new CharacterNotExistsException("Character that you are trying attach note to does not exists");
+        }
         return noteMapper.characterNoteToDto(characterNoteRepository.save(noteToSave));
     }
 

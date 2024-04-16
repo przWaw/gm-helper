@@ -3,6 +3,8 @@ package com.pWaw.gmhelper.DataManipulation.Controller;
 import com.pWaw.gmhelper.DataManipulation.Controller.Swagger.NoteController;
 import com.pWaw.gmhelper.DataManipulation.DTO.Note.CampaignNoteDto;
 import com.pWaw.gmhelper.DataManipulation.DTO.Note.CharacterNoteDto;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.CampaignNotExistsException;
+import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.CharacterNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.NoteNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Service.NoteService;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +32,7 @@ public class NoteControllerImpl implements NoteController {
     }
 
     @Override
-    public ResponseEntity<CampaignNoteDto> createCampaignNote(CampaignNoteDto noteDto) {
+    public ResponseEntity<CampaignNoteDto> createCampaignNote(CampaignNoteDto noteDto) throws CampaignNotExistsException {
         CampaignNoteDto dto = noteService.createCampaignNote(noteDto);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
@@ -41,7 +43,7 @@ public class NoteControllerImpl implements NoteController {
     }
 
     @Override
-    public ResponseEntity<CharacterNoteDto> createCharacterNote(CharacterNoteDto noteDto) {
+    public ResponseEntity<CharacterNoteDto> createCharacterNote(CharacterNoteDto noteDto) throws CharacterNotExistsException {
         CharacterNoteDto dto = noteService.createCharacterNote(noteDto);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
