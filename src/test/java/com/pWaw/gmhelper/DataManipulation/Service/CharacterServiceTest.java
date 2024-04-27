@@ -3,9 +3,7 @@ package com.pWaw.gmhelper.DataManipulation.Service;
 import com.pWaw.gmhelper.DataManipulation.DTO.Character.CharacterDto;
 import com.pWaw.gmhelper.DataManipulation.Exception.CustomExcpetion.CharacterNotExistsException;
 import com.pWaw.gmhelper.DataManipulation.Mappers.CharacterMapper;
-import com.pWaw.gmhelper.DataManipulation.Model.Campaign;
 import com.pWaw.gmhelper.DataManipulation.Model.Character;
-import com.pWaw.gmhelper.DataManipulation.Model.Image;
 import com.pWaw.gmhelper.DataManipulation.Repository.CampaignRepository;
 import com.pWaw.gmhelper.DataManipulation.Repository.CharacterRepository;
 import com.pWaw.gmhelper.DataManipulation.Repository.ImageRepository;
@@ -129,12 +127,138 @@ class CharacterServiceTest {
     }
 
     @Test
+    public void createCharacter_characterDtoWithImageAndCampaignProvided() {
+        CharacterDto input = new CharacterDto();
+
+        when(characterMapper.characterToDto(any(Character.class))).thenReturn(new CharacterDto());
+        when(characterMapper.dtoToCharacter(any(CharacterDto.class))).thenReturn(new Character());
+        when(characterRepository.save(any())).thenReturn(new Character());
+        when(campaignRepository.existsById(any())).thenReturn(true);
+        when(imageRepository.existsById(any())).thenReturn(true);
+
+        CharacterDto result = characterService.createCharacter(input);
+
+        assertAll(() -> {
+            assertEquals(CharacterDto.class, result.getClass());
+            verify(characterMapper, times(1)).characterToDto(any(Character.class));
+            verify(characterMapper,times(1)).dtoToCharacter(any(CharacterDto.class));
+            verify(characterRepository, times(1)).save(any());
+            verify(campaignRepository, times(1)).existsById(any());
+            verify(imageRepository, times(1)).existsById(any());
+        });
+    }
+
+    @Test
+    public void createCharacter_characterDtoWithImageProvided() {
+        CharacterDto input = new CharacterDto();
+
+        when(characterMapper.characterToDto(any(Character.class))).thenReturn(new CharacterDto());
+        when(characterMapper.dtoToCharacter(any(CharacterDto.class))).thenReturn(new Character());
+        when(characterRepository.save(any())).thenReturn(new Character());
+        when(campaignRepository.existsById(any())).thenReturn(false);
+        when(imageRepository.existsById(any())).thenReturn(true);
+
+        CharacterDto result = characterService.createCharacter(input);
+
+        assertAll(() -> {
+            assertEquals(CharacterDto.class, result.getClass());
+            verify(characterMapper, times(1)).characterToDto(any(Character.class));
+            verify(characterMapper,times(1)).dtoToCharacter(any(CharacterDto.class));
+            verify(characterRepository, times(1)).save(any());
+            verify(campaignRepository, times(1)).existsById(any());
+            verify(imageRepository, times(1)).existsById(any());
+        });
+    }
+
+    @Test
+    public void createCharacter_characterDtoWithCampaignProvided() {
+        CharacterDto input = new CharacterDto();
+
+        when(characterMapper.characterToDto(any(Character.class))).thenReturn(new CharacterDto());
+        when(characterMapper.dtoToCharacter(any(CharacterDto.class))).thenReturn(new Character());
+        when(characterRepository.save(any())).thenReturn(new Character());
+        when(campaignRepository.existsById(any())).thenReturn(true);
+        when(imageRepository.existsById(any())).thenReturn(false);
+
+        CharacterDto result = characterService.createCharacter(input);
+
+        assertAll(() -> {
+            assertEquals(CharacterDto.class, result.getClass());
+            verify(characterMapper, times(1)).characterToDto(any(Character.class));
+            verify(characterMapper,times(1)).dtoToCharacter(any(CharacterDto.class));
+            verify(characterRepository, times(1)).save(any());
+            verify(campaignRepository, times(1)).existsById(any());
+            verify(imageRepository, times(1)).existsById(any());
+        });
+    }
+
+    @Test
     public void updateCharacter_shouldReturnCharacterDto() throws CharacterNotExistsException {
 
         when(characterRepository.findById(any())).thenReturn(Optional.of(new Character()));
         when(characterMapper.characterToDto(any(Character.class))).thenReturn(new CharacterDto());
         when(characterMapper.dtoToCharacter(any(CharacterDto.class))).thenReturn(new Character());
         when(characterRepository.save(any())).thenReturn(new Character());
+
+        characterService.updateCharacter(new CharacterDto());
+
+        assertAll(() -> {
+            verify(characterRepository).findById(any());
+            verify(characterMapper).dtoToCharacter(any(CharacterDto.class));
+            verify(characterMapper).characterToDto(any(Character.class));
+            verify(characterRepository).save(any());
+        });
+    }
+
+    @Test
+    public void updateCharacter_characterDtoWithImageAndCampaignProvided() throws CharacterNotExistsException {
+
+        when(characterRepository.findById(any())).thenReturn(Optional.of(new Character()));
+        when(characterMapper.characterToDto(any(Character.class))).thenReturn(new CharacterDto());
+        when(characterMapper.dtoToCharacter(any(CharacterDto.class))).thenReturn(new Character());
+        when(characterRepository.save(any())).thenReturn(new Character());
+        when(campaignRepository.existsById(any())).thenReturn(true);
+        when(imageRepository.existsById(any())).thenReturn(true);
+
+        characterService.updateCharacter(new CharacterDto());
+
+        assertAll(() -> {
+            verify(characterRepository).findById(any());
+            verify(characterMapper).dtoToCharacter(any(CharacterDto.class));
+            verify(characterMapper).characterToDto(any(Character.class));
+            verify(characterRepository).save(any());
+        });
+    }
+
+    @Test
+    public void updateCharacter_characterDtoWithCampaignProvided() throws CharacterNotExistsException {
+
+        when(characterRepository.findById(any())).thenReturn(Optional.of(new Character()));
+        when(characterMapper.characterToDto(any(Character.class))).thenReturn(new CharacterDto());
+        when(characterMapper.dtoToCharacter(any(CharacterDto.class))).thenReturn(new Character());
+        when(characterRepository.save(any())).thenReturn(new Character());
+        when(campaignRepository.existsById(any())).thenReturn(true);
+        when(imageRepository.existsById(any())).thenReturn(false);
+
+        characterService.updateCharacter(new CharacterDto());
+
+        assertAll(() -> {
+            verify(characterRepository).findById(any());
+            verify(characterMapper).dtoToCharacter(any(CharacterDto.class));
+            verify(characterMapper).characterToDto(any(Character.class));
+            verify(characterRepository).save(any());
+        });
+    }
+
+    @Test
+    public void updateCharacter_characterDtoWithImageProvided() throws CharacterNotExistsException {
+
+        when(characterRepository.findById(any())).thenReturn(Optional.of(new Character()));
+        when(characterMapper.characterToDto(any(Character.class))).thenReturn(new CharacterDto());
+        when(characterMapper.dtoToCharacter(any(CharacterDto.class))).thenReturn(new Character());
+        when(characterRepository.save(any())).thenReturn(new Character());
+        when(campaignRepository.existsById(any())).thenReturn(false);
+        when(imageRepository.existsById(any())).thenReturn(true);
 
         characterService.updateCharacter(new CharacterDto());
 
