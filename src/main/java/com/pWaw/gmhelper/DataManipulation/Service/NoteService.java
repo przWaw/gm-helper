@@ -75,7 +75,7 @@ public class NoteService {
     }
 
     public CampaignNoteDto updateCampaignNote(CampaignNoteDto noteDto) throws NoteNotExistsException, CampaignNotExistsException {
-        if (!noteRepository.existsById(noteDto.getId())) {
+        if (!campaignNoteRepository.existsById(noteDto.getId())) {
             throw new NoteNotExistsException("Wrong id was provided during update operation, note does not exists");
         }
         if (!campaignRepository.existsById(noteDto.getCampaignId())) {
@@ -86,7 +86,7 @@ public class NoteService {
     }
 
     public CharacterNoteDto updateCharacterNote(CharacterNoteDto noteDto) throws NoteNotExistsException, CharacterNotExistsException {
-        if (!noteRepository.existsById(noteDto.getId())) {
+        if (!characterNoteRepository.existsById(noteDto.getId())) {
             throw new NoteNotExistsException("Wrong id was provided during update operation, note does not exists");
         }
         if (!characterRepository.existsById(noteDto.getCharacterId())) {
