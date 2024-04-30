@@ -26,7 +26,7 @@ class CampaignServiceTest {
     private static CampaignRepository campaignRepository;
     @Mock
     private static CampaignMapper campaignMapper;
-    private static  CampaignService campaignService;
+    private static CampaignService campaignService;
     private AutoCloseable openMocks;
 
     @BeforeEach
